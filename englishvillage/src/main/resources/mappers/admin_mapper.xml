@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+ "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.englishvillage.member.admin">
+
+	<sql id="memberSearch">
+		<choose>
+         	<!-- 검색옵션이 전체 검색일 경우 -->
+         	<when test="searchOption == 'all'">
+         		WHERE (MEMBER_NAME LIKE '%' || #{keyword} || '%'
+        	 	 OR MEMBER_EMAIL LIKE '%' || #{keyword} || '%')
+         	</when>
+         	
+         	<!-- 전체 검색이 아닐 경우 -->
+         	<otherwise>
+         		WHERE ${searchOption} LIKE '%' || #{keyword} || '%'
+         	</otherwise>
+         </choose>
+	</sql>
+	
+	<sql id="tutorSearch">
+		<choose>
+         	<!-- 검색옵션이 전체 검색일 경우 -->
+         	<when test="searchOption == 'all'">
+         		AND (MEMBER_NAME LIKE '%' || #{keyword} || '%'
+        	 	 OR MEMBER_EMAIL LIKE '%' || #{keyword} || '%')
+         	</when>
+         	
+         	<!-- 전체 검색이 아닐 경우 -->
+         	<otherwise>
+         		AND ${searchOption} LIKE '%' || #{keyword} || '%'
+         	</otherwise>
+         </choose>
+	</sql>
+	
+	<sql id="quetionSearch">
+		<choose>
+         	<!-- 검색옵션이 전체 검색일 경우 -->
+         	<when test="searchOption == 'all'">
+         		where (TITLE LIKE '%'||#{keyword}||'%'
+					OR CONTENT LIKE '%'||#{keyword}||'%')
+         	</when>
+         	
+         	<!-- 전체 검색이 아닐 경우 -->
+         	<otherwise>
+         		WHERE ${searchOption} LIKE '%' || #{keyword} || '%'
+         	</otherwise>
+         </choose>
+	</sql>
+
+	<resultMap type="com.englishvillage.member.admin.model.MemberListDto" 
+      id="memberListResultMap">
+      <result column="MEMBER_NO" property="no"/>
+      <result column="MEMBER_EMAIL" property="member_email"/>
+      <result column="MEMBER_PASSWORD" property="password"/>
+      <result column="MEMBER_NAME" property="member_name"/>
+      <result column="MEMBER_CREATE_DATE" property="createdDate"
+         javaType="java.util.Date"/>
+      <result column="MEMBER_MODIFY_DATE" property="modifiedDate"
+         javaType="java.util.Date"/>
+      <result column="MEMBER_COUNTRY" property="country"/>
+      <result column="MEMBER_GENDER" property="gender"/>
+      <result column="MEMBER_BIRTH_DATE" property="birthDate"
+         javaType="java.util.Date"/>
+      <result column="MEMBER_POINT" property="point"/>
+      <result column="MEMBER_GRADE" property="grade"/>
+      <result column="YOUTUBE_URL" property="url"/>
+      <result column="PRICE" property="price"/>
+      <result column="TUTOR_NO" property="tutorNo"/>
+      <result column="SCORE" property="score"/>
+      <result column="STUDY_NAME" property="tutorTitle"/>
+      <result column="TUTOR_INTRODUCE" property="tutorText"/>
+     
+      
+      <result column="IDX"                property="idx"   />
+      <result column="ORIGINAL_FILE_NAME"   property="original_File_Name"   />
+      <result column="STORE_FILE_NAME"     property="store_File_Name"   />
+      <result column="FILE_SIZE"            property="file_size"   />
+      <result column="FILE_CRE_DATE"             property="creDate"
+         javaType="java.util.Date"/>
+      
+        
+   </resultMap>
+   
+   <resultMap type="com.englishvillage.member.admin.model.QuestionBoardDto" 
+      id="questionListResultMap">
+      	
+      
+      	<result column="IDX" property="idx"/>   
+      	<result column="BOARD_NO" property="boardNo"/>   
+   		<result column="MEMBER_NO" property="no"/>   
+   		<result column="MEMBER_NAME" property="name"/>   
+      	<result column="TITLE" property="title"/>   
+      	<result column="CONTENT" property="content"/>
+      	<result column="BOARD_CREATE_DATE" property="boardCreateDate"/>   
+      	<result column="BOARD_MODIFY_DATE" property="boardModDate"/>   
+      	<result column="ANSWER_STATUS" property="answerStatus"/>   
+      	<result column="MEMBER_GRADE" property="grade"/>
+      	<result column="MEMBER_EMAIL" property="email"/>
+      	<result column="REPLY" property="reply"/>
+      	<result column="COMMENT_CREATE_DATE" property="commentCreDate"/>
+      	
+   </resultMap>
+	
+	
+	<select id="studentSelectList" parameterType="map"
+      resultMap="memberListResultMap">
+      
+      SELECT MF.RNUM, MF.MEMBER_NO, MF.MEMBER_EMAIL, MF.MEMBER_NAME
+         , MF.MEMBER_CREATE_DATE, MF.MEMBER_MODIFY_DATE, MF.MEMBER_COUNTRY
+         , MF.MEMBER_BIRTH_DATE ,MF.MEMBER_GENDER, MF.MEMBER_POINT, MF.MEMBER_GRADE
+         FROM (
+               SELECT ROWNUM RNUM, M.MEMBER_NO, M.MEMBER_EMAIL
+                  , M.MEMBER_NAME, M.MEMBER_CREATE_DATE, M.MEMBER_MODIFY_DATE
+                  , M.MEMBER_COUNTRY, M.MEMBER_GENDER, M.MEMBER_POINT, M.MEMBER_BIRTH_DATE, M.MEMBER_GRADE
+                FROM(
+                    SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_CREATE_DATE, MEMBER_NAME, MEMBER_MODIFY_DATE
+                    ,MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_GRADE, MEMBER_BIRTH_DATE, MEMBER_POINT
+                     FROM MEMBER
+                     <include refid="memberSearch"></include>
+                     AND MEMBER_GRADE = 'N'
+                     ORDER BY MEMBER_NO DESC
+                 ) M
+        ) MF
+        WHERE MF.RNUM BETWEEN #{start} AND #{end}                
+  
+   </select>
+   
+   <select id="studentSelectTotalCount" resultType="int" parameterType="map">
+      SELECT COUNT(*)
+      FROM MEMBER
+      <include refid="memberSearch"></include>
+      AND MEMBER_GRADE = 'N'
+   </select>
+	
+	
+	
+	<select id="studentSelectCurPage" parameterType="map" resultType="int">
+		SELECT FLOOR((RNUM-1) / 10)+1 no
+		FROM (SELECT ROWNUM RNUM, M.MEMBER_NO, M.MEMBER_EMAIL
+               , M.MEMBER_NAME, M.MEMBER_CREATE_DATE, M.MEMBER_MODIFY_DATE
+               , M.MEMBER_COUNTRY, M.MEMBER_GENDER, M.MEMBER_POINT, M.MEMBER_BIRTH_DATE, M.MEMBER_GRADE
+		FROM ( SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_CREATE_DATE, MEMBER_NAME, MEMBER_MODIFY_DATE
+                    ,MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_GRADE, MEMBER_BIRTH_DATE, MEMBER_POINT
+                     FROM MEMBER
+		<include refid="memberSearch"/>
+		AND MEMBER_GRADE = 'N'
+		ORDER BY MEMBER_NO DESC )
+		M )
+		WHERE MEMBER_NO = #{no}
+   </select>
+   
+   <select id="memberStudentSelectOne" parameterType="int"
+      resultMap="memberListResultMap">
+      SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_CREATE_DATE, MEMBER_NAME, MEMBER_MODIFY_DATE
+             ,MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_GRADE, MEMBER_BIRTH_DATE, MEMBER_POINT,MEMBER_PASSWORD
+      FROM MEMBER
+      WHERE MEMBER_NO = #{no}   
+   </select>
+   
+   <update id="memberStudentUpdateOne" parameterType="com.englishvillage.member.admin.model.MemberListDto">
+      UPDATE MEMBER SET 
+
+         MEMBER_EMAIL = #{member_email},
+         MEMBER_NAME = #{member_name},
+         MEMBER_PASSWORD = #{password},
+         MEMBER_GENDER = #{gender},
+         MEMBER_COUNTRY = #{country},
+         MEMBER_BIRTH_DATE = #{birthDate},
+         MEMBER_MODIFY_DATE = SYSDATE
+  
+      WHERE MEMBER_NO = #{no}
+   </update>
+   
+   <select id="tutorSelectList" parameterType="map"
+      resultMap="memberListResultMap">
+      
+      SELECT MF.RNUM, MF.MEMBER_NO, MF.MEMBER_EMAIL, MF.MEMBER_NAME
+         , MF.MEMBER_CREATE_DATE, MF.MEMBER_MODIFY_DATE, MF.MEMBER_COUNTRY
+         , MF.MEMBER_BIRTH_DATE ,MF.MEMBER_GENDER, MF.MEMBER_POINT, MF.MEMBER_GRADE
+         , MF.ORIGINAL_FILE_NAME
+         FROM (
+               SELECT ROWNUM RNUM, M.MEMBER_NO, M.MEMBER_EMAIL
+                  , M.MEMBER_NAME, M.MEMBER_CREATE_DATE, M.MEMBER_MODIFY_DATE
+                  , M.MEMBER_COUNTRY, M.MEMBER_GENDER, M.MEMBER_POINT, M.MEMBER_BIRTH_DATE, M.MEMBER_GRADE
+                  , M.ORIGINAL_FILE_NAME	
+                FROM(
+                    SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_CREATE_DATE, MEMBER_NAME, MEMBER_MODIFY_DATE
+                    ,MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_GRADE, MEMBER_BIRTH_DATE, MEMBER_POINT
+                    , FILE_PROFILE_IMAGE.ORIGINAL_FILE_NAME
+                     FROM MEMBER LEFT OUTER JOIN FILE_PROFILE_IMAGE
+                     ON MEMBER.MEMBER_NO = FILE_PROFILE_IMAGE.TUTOR_NO
+                     <include refid="memberSearch"></include>
+                     AND MEMBER_GRADE = 'Y'
+                     ORDER BY MEMBER_NO DESC
+                 ) M
+        ) MF
+        WHERE MF.RNUM BETWEEN #{start} AND #{end}                       
+   </select>
+   
+   <select id="tutorSelectCurPage" parameterType="map" resultType="int">
+		SELECT FLOOR((RNUM-1) / 10)+1 no
+		FROM (SELECT ROWNUM RNUM, M.MEMBER_NO, M.MEMBER_EMAIL
+               , M.MEMBER_NAME, M.MEMBER_CREATE_DATE, M.MEMBER_MODIFY_DATE
+               , M.MEMBER_COUNTRY, M.MEMBER_GENDER, M.MEMBER_POINT, M.MEMBER_BIRTH_DATE, M.MEMBER_GRADE
+		FROM ( SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_CREATE_DATE, MEMBER_NAME, MEMBER_MODIFY_DATE
+                    ,MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_GRADE, MEMBER_BIRTH_DATE, MEMBER_POINT
+                     FROM MEMBER
+		<include refid="memberSearch"/>
+		AND MEMBER_GRADE = 'Y'
+		ORDER BY MEMBER_NO DESC )
+		M )
+		WHERE MEMBER_NO = #{no}
+   </select>
+   
+   <select id="tutorSelectTotalCount" resultType="int" parameterType="map">
+      SELECT COUNT(*)
+      FROM MEMBER
+      <include refid="memberSearch"></include>
+      AND MEMBER_GRADE = 'Y'
+   </select>
+   
+   <select id="memberTutorSelectOne" parameterType="int"
+      resultMap="memberListResultMap">
+     SELECT F.MEMBER_NO, F.MEMBER_EMAIL
+                  , F.MEMBER_NAME, F.MEMBER_CREATE_DATE, F.MEMBER_MODIFY_DATE
+                  , F.MEMBER_COUNTRY, F.MEMBER_GENDER, F.MEMBER_POINT, F.MEMBER_BIRTH_DATE, F.MEMBER_GRADE
+                  , F.ORIGINAL_FILE_NAME, E.TUTOR_NO, E.SCORE, E.PRICE, E.YOUTUBE_URL,F.MEMBER_PASSWORD, E.STUDY_NAME,
+                  E.TUTOR_INTRODUCE,F.STORE_FILE_NAME
+        FROM (SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_CREATE_DATE, MEMBER_NAME, MEMBER_MODIFY_DATE
+        ,MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_GRADE, MEMBER_BIRTH_DATE, MEMBER_POINT, MEMBER_PASSWORD,
+        FILE_PROFILE_IMAGE.ORIGINAL_FILE_NAME,FILE_PROFILE_IMAGE.STORE_FILE_NAME
+        FROM MEMBER LEFT OUTER JOIN FILE_PROFILE_IMAGE 
+        ON MEMBER.MEMBER_NO = FILE_PROFILE_IMAGE.TUTOR_NO) F
+    , (SELECT T.TUTOR_NO, T.TUTOR_INTRODUCE, T.YOUTUBE_URL, T.STUDY_NAME, T.PRICE, T.STATUS_CHECK
+              , A.SCORE
+        FROM TUTOR_INFO T, 
+            (SELECT TUTOR_NO, NVL(AVG(SCORE),0) SCORE
+            FROM EVALUATION
+            GROUP BY TUTOR_NO) A
+            WHERE T.TUTOR_NO = A.TUTOR_NO(+)) E
+	WHERE F.MEMBER_NO = E.TUTOR_NO
+	AND F.MEMBER_NO = #{no}
+	ORDER BY MEMBER_NO DESC
+   </select>
+   
+   <update id="memberTutorUpdateOne" parameterType="com.englishvillage.member.admin.model.MemberListDto">
+      UPDATE MEMBER SET 
+
+         MEMBER_EMAIL = #{member_email},
+         MEMBER_NAME = #{member_name},
+         MEMBER_PASSWORD = #{password},
+         MEMBER_GENDER = #{gender},
+         MEMBER_COUNTRY = #{country},
+         MEMBER_BIRTH_DATE = #{birthDate},
+         MEMBER_MODIFY_DATE = SYSDATE
+  
+      WHERE MEMBER_NO = #{no}
+   </update>
+   
+   <update id="TutorProfileUpdateOne" parameterType="com.englishvillage.member.admin.model.MemberListDto">
+      UPDATE TUTOR_INFO SET
+      		YOUTUBE_URL = #{url},
+      		PRICE = #{price},
+      		STUDY_NAME = #{tutorTitle},
+      		TUTOR_INTRODUCE = #{tutorText}
+      WHERE TUTOR_NO = #{no}
+   </update>
+   
+    <delete id="studentDeleteOne" parameterType="java.lang.Integer">
+      DELETE FROM MEMBER
+      WHERE MEMBER_NO = #{no}
+   </delete>
+   
+   <delete id="tutorMemberDeleteOne" parameterType="java.lang.Integer">
+      DELETE FROM MEMBER
+      WHERE MEMBER_NO = #{no}
+   </delete>
+   
+   <delete id="tutorInfoDeleteOne" parameterType="java.lang.Integer">
+      DELETE FROM TUTOR_INFO
+      WHERE TUTOR_NO = #{no}
+   </delete>
+   
+   <delete id="tutorEvaluationDeleteOne" parameterType="java.lang.Integer">
+      DELETE FROM EVALUATION 
+      WHERE TUTOR_NO = #{no}
+   </delete>
+   
+   <delete id="tutorfileDeleteOne" parameterType="java.lang.Integer">
+      DELETE FROM FILE_PROFILE_IMAGE 
+      WHERE TUTOR_NO = #{no}
+   </delete>
+   
+   
+   
+   
+   <select id="questionSelectList" parameterType="map"
+      resultMap="questionListResultMap">
+
+	SELECT MQ.RNUM, MQ.IDX, MQ.MEMBER_NO, MQ.TITLE, MQ.CONTENT,
+	MQ.BOARD_CREATE_DATE, MQ.BOARD_MODIFY_DATE, MQ.ANSWER_STATUS,
+	MQ.MEMBER_GRADE
+		FROM (
+			SELECT ROWNUM RNUM, Q.IDX, Q.MEMBER_NO, Q.TITLE, Q.CONTENT,
+			Q.BOARD_CREATE_DATE, Q.BOARD_MODIFY_DATE,
+			Q.ANSWER_STATUS,Q.MEMBER_GRADE
+			FROM (SELECT QUESTION_BOARD.IDX, QUESTION_BOARD.MEMBER_NO,
+				QUESTION_BOARD.TITLE,
+				QUESTION_BOARD.CONTENT, QUESTION_BOARD.BOARD_CREATE_DATE, QUESTION_BOARD.BOARD_MODIFY_DATE,
+				QUESTION_BOARD.ANSWER_STATUS,
+				MEMBER.MEMBER_GRADE
+				FROM MEMBER LEFT OUTER JOIN QUESTION_BOARD
+				ON QUESTION_BOARD.MEMBER_NO = MEMBER.MEMBER_NO
+				<include refid="quetionSearch"></include>
+			ORDER BY IDX DESC) Q
+		) MQ
+	WHERE MQ.RNUM BETWEEN #{start} AND #{end}
+	ORDER BY MQ.ANSWER_STATUS,MQ.IDX ASC                        
+   </select>
+   
+   <select id="questionSelectTotalCount" resultType="int" parameterType="map">
+      SELECT COUNT(*)
+      FROM QUESTION_BOARD
+      <include refid="quetionSearch"></include>
+   </select>
+   
+   <select id="questionSelectCurPage" parameterType="map" resultType="int">
+	SELECT FLOOR((RNUM-1) / 10)+1 no
+		FROM ( SELECT ROWNUM RNUM, Q.IDX, Q.MEMBER_NO, Q.TITLE,
+				Q.CONTENT, Q.BOARD_CREATE_DATE,
+				Q.BOARD_MODIFY_DATE, Q.ANSWER_STATUS
+				FROM ( SELECT IDX, MEMBER_NO, TITLE, CONTENT, BOARD_CREATE_DATE,
+						BOARD_MODIFY_DATE,
+						ANSWER_STATUS
+						FROM QUESTION_BOARD
+						ORDER BY IDX DESC )
+				Q )
+				WHERE IDX = #{no}
+   </select>
+   
+   <select id="questionSelectOne" parameterType="int"
+      resultMap="questionListResultMap">
+	SELECT M.MEMBER_NO, M.MEMBER_NAME, M.MEMBER_GRADE, M.MEMBER_EMAIL,
+	Q.TITLE, Q.CONTENT, Q.IDX, Q.MEMBERNO, Q.COMMENT_IDX,
+	Q.COMMENT_CREATE_DATE, Q.BOARD_NO, Q.BOARD_CREATE_DATE, Q.REPLY, Q.ANSWER_STATUS
+	FROM MEMBER M, (SELECT QUESTION_BOARD.TITLE TITLE, QUESTION_BOARD.CONTENT
+					CONTENT,QUESTION_BOARD.IDX IDX,QUESTION_BOARD.MEMBER_NO MEMBERNO,
+					QUESTION_BOARD.BOARD_CREATE_DATE BOARD_CREATE_DATE, QUESTION_BOARD.ANSWER_STATUS,
+					QUESTION_BOARD_COMMENT.IDX COMMENT_IDX, QUESTION_BOARD_COMMENT.BOARD_NO BOARD_NO,
+					QUESTION_BOARD_COMMENT.COMMENT_CREATE_DATE COMMENT_CREATE_DATE,
+					QUESTION_BOARD_COMMENT.REPLY REPLY
+					FROM QUESTION_BOARD, QUESTION_BOARD_COMMENT
+					WHERE QUESTION_BOARD.IDX = QUESTION_BOARD_COMMENT.BOARD_NO(+)) Q
+	WHERE M.MEMBER_NO = Q.MEMBERNO
+	and q.idx = #{idx}
+   </select>
+   
+   
+   <insert id="replyInsertOne" parameterType="map">
+      INSERT INTO QUESTION_BOARD_COMMENT
+         (IDX, BOARD_NO, COMMENT_CREATE_DATE,
+         REPLY, ADMIN_NO)
+      VALUES(
+         QUESTION_BOARD_COMMENT_IDX_SEQ.NEXTVAL, #{idx}, SYSDATE, 
+         #{reply}, 0
+      )
+   </insert>
+   
+   <update id="replyCheck" parameterType="com.englishvillage.member.admin.model.MemberListDto">
+      UPDATE QUESTION_BOARD SET 
+
+         ANSWER_STATUS = 'Y'
+  
+      WHERE IDX = #{idx}
+   </update>
+   
+   <insert id="insertFile" parameterType="map">
+      INSERT INTO FILE_PROFILE_IMAGE
+         (IDX, TUTOR_NO, ORIGINAL_FILE_NAME,
+         STORE_FILE_NAME, FILE_SIZE, FILE_CREATE_DATE)
+      VALUES(
+         FILE_PROFILE_IMAGE_IDX_SEQ.NEXTVAL, #{no}, #{original_File_Name},
+         #{store_File_Name}, #{file_size}, SYSDATE
+         
+      )
+   </insert>
+   
+   <select id="fileSelectList" parameterType="int"
+      resultType="map"> <!-- resultType을 사용해서 file에 대한 Dto를 만들지 않아도 가능한 기술을 접목시킨다 -->
+      SELECT IDX, ORIGINAL_FILE_NAME, STORE_FILE_NAME, ROUND(FILE_SIZE/1024, 1) AS FILE_SIZE
+	  FROM FILE_PROFILE_IMAGE
+	  WHERE TUTOR_NO = #{no};
+   </select>
+   
+   <delete id="fileDelete" parameterType="int">
+   		DELETE FROM FILE_PROFILE_IMAGE
+		WHERE IDX = #{idx}
+   </delete>
+   
+   <select id="fileSelectStoreFileName" parameterType="int" resultType="com.englishvillage.member.admin.model.MemberListDto">
+   		SELECT IDX, STORE_FILE_NAME
+		FROM FILE_PROFILE_IMAGE
+		WHERE TUTOR_NO = #{no}
+   </select>
+   
+   
+</mapper>
+
+
+
+

@@ -1,0 +1,285 @@
+input:focus {outline:none;}
+textarea:focus {outline:none;}
+
+table, tr, th, td{
+	
+	padding: 10px 10px;	
+}  
+th{
+	border-right: 1px solid #C4C3C3;
+	border-bottom: 1px solid #C4C3C3;
+	width: 200px;
+	background-color: #d0e9c6;
+}
+td {
+	border-bottom: 1px solid #C4C3C3;
+}
+.myInfoFont{
+	padding-left: 30px;
+	font-size: 30px;
+	color: #FA6980;
+	font-weight: bold;	
+}
+#pointFont{
+	padding-left: 45px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.infomationFont{
+	text-align: left;
+	margin-left: 10px;
+}
+.infomationContents{
+	text-align: left; 
+	margin-left: 40px;
+}
+#infoBtn{
+	background-color: white;
+	border-style: none;
+	text-align: left;	
+}
+#chargeBtn{
+	border-radius: 10px;
+	margin-left: 40px;
+	padding: 10px 20px;
+}
+#infoChargeBtn{
+	border-radius: 10px;
+	margin-left: 40px;
+	padding: 10px 20px;
+}
+#qnaChargeBtn{
+	border-radius: 10px;
+	margin-left: 40px;
+	padding: 10px 20px;
+}
+#profileImages{
+	width: 210px; 
+	height: 210px;
+	text-align: center;
+	margin-left: 80px;
+	margin-right: 20px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	float: left;
+}
+#profileAll{
+	float: left;
+	margin-left: 120px;
+	margin-top: 10px;
+}
+#introduceContents{
+	clear: both;
+	width: 720px;
+	height: 150px;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	text-align: left;
+	
+}
+#updateBtnMove{
+	margin: 20px 20px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	float: right;
+}
+#backBtnMove{
+	margin: 20px 20px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	float: right;
+}
+.profileContents{
+	border-style: none;
+	width: 200px;
+	height: 38px;
+}
+.profileInfoContents{
+	height: 26px;
+	margin-top: 4px;
+}
+.profileTitle{
+	margin-left: 40px;
+	margin-top: 80px;
+	width: 220px;
+	float: left;
+}
+#pageSize {
+	width: 1900px;
+	height: 920px;
+	padding: 150px 0px 0px 200px;
+	box-sizing: border-box;
+	padding-bottom: 0px;
+}
+#pageName {
+	font-size: 40px;
+	font-weight: bold;
+	border-bottom: 3px solid #EBEDED;
+	margin-bottom: 70px;
+}
+#checkBox{
+	border: 1px solid gray;
+	margin: auto;
+	width: 500px;
+	height: 200px;
+	text-align: center;
+	border-radius: 20px;
+	
+}
+#pwdWrite{
+	font-weight: bold;
+	font-size: 22px;
+	margin-top: 20px;
+	
+}
+#PasswordCheck{
+	width: 280px;
+}
+#pwdCheckBtnBack{
+	margin: 20px 20px;
+	width: 90px;
+	font-size: 14px;
+}
+#pwdCheckBtnUpdate{
+	margin: 20px 20px;
+	width: 90px;
+	font-size: 14px;
+}
+#deleteBox{
+	border: 1px solid gray;
+	margin: auto;
+	width: 800px;
+	height: 450px;
+	text-align: center;
+	border-radius: 20px;	
+}
+#deleteBtnMember{
+	margin: 20px 20px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+}
+#deleteBtnBack{
+	margin: 20px 20px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+}
+#myPoint{
+	font-weight: bold;
+}
+#deletePoint{
+	color: #FA6980;
+	font-weight: bold;
+	font-size: 24px;
+}
+#updateBtn{
+	margin: 300px 70px 20px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	float: right;	
+}
+#myPageBox{
+	margin-left: 150px;
+	border: 1px soild black;
+}
+#checkBox{
+	margin-top: 120px;
+}
+#updateReviseBtn{
+	margin-bottom: 20px;
+	border-radius: 10px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	float: right;	
+	margin-right: 120px;
+}
+#deleteReviseBtn{
+	margin-bottom: 20px;
+	border-radius: 10px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	float: right;	
+	margin-right: 120px;
+}
+#backReviseBtn{
+	margin-bottom: 20px;
+	border-radius: 10px;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	float: right;	
+	margin-right: 120px;
+}
+#boardWriteBtn{
+	margin-top: 20px;
+	float: right;	
+	font-size: 20px;
+}
+#boardTitleWrite{
+	width: 500px;
+	height: 30px;
+}
+#boardContentsWrite{
+	width: 500px;
+	height: 400px;
+	margin-top: 20px;
+}
+#leftTitle{
+	width: 70px;
+	border: 1px solid black;
+	float: left;
+	margin-top: 20px;
+}
+.leftContents{
+	width: 70px;
+}
+#content{
+	height: 400px;
+}
+#okayBtn{
+	float: right;
+}
+#cancelBtn{
+	float: right;
+	margin-right: 10px;
+}
+
+#preview {
+	width: 210px;
+	height: 210px;
+	float:left;
+	position:relative;
+	vertical-align: bottom;
+}
+
+
+#previewImg{
+	width:210px;
+	height: 210px;
+}
+
+#layoutImg{
+width: 150px;
+    height: 150px;
+    margin: 0px 52px;
+    margin-bottom: 20px;
+}
+
+#inputPhotoBtn{
+	position:relative;
+	top:-20px; 
+	right:-100px;
+}
+
+#selectPictureButton {
+	width: 30px;
+	height: 30px;
+	border-radius: 20px;
+}

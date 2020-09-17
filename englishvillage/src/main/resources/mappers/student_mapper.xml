@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+ "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.englishvillage">
+
+	<sql id="search">
+		<choose>
+			<!-- 검색옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+				WHERE MEMBER_NAME LIKE '%' || #{keyword} || '%'
+				OR
+				MEMBER_EMAIL LIKE '%' || #{keyword} || '%'
+			</when>
+
+			<!-- 전체 검색이 아닐 경우 -->
+			<otherwise>
+				WHERE ${searchOption} LIKE '%' || #{keyword} || '%'
+			</otherwise>
+		</choose>
+	</sql>
+
+	<sql id="quetionSearch">
+		<choose>
+			<!-- 검색옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+				where (TITLE LIKE '%'||#{keyword}||'%'
+				OR CONTENT LIKE
+				'%'||#{keyword}||'%')
+			</when>
+
+			<!-- 전체 검색이 아닐 경우 -->
+			<otherwise>
+				WHERE ${searchOption} LIKE '%' || #{keyword} || '%'
+			</otherwise>
+		</choose>
+	</sql>
+
+	<resultMap
+		type="com.englishvillage.member.student.model.MemberFileDto"
+		id="memberResultMap">
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="MEMBER_EMAIL" property="memberEmail" />
+		<result column="MEMBER_PASSWORD" property="memberPassword" />
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_CREATE_DATE"
+			property="memberCreatedDate" javaType="java.util.Date" />
+		<result column="MEMBER_MODIFY_DATE"
+			property="memberModifiedDate" javaType="java.util.Date" />
+		<result column="MEMBER_COUNTRY" property="memberCountry" />
+		<result column="MEMBER_GENDER" property="memberGender" />
+		<result column="MEMBER_BIRTH_DATE" property="memberBirthDate"
+			javaType="java.util.Date" />
+		<result column="MEMBER_POINT" property="memberPoint" />
+		<result column="MEMBER_GRADE" property="memberGrade" />
+
+
+		<result column="IDX" property="idx" />
+		<result column="ORIGINAL_FILE_NAME" property="originalFileName" />
+		<result column="STORED_FILE_NAME" property="storedFileName" />
+		<result column="FILE_SIZE" property="fileSize" />
+		<result column="CRE_DATE" property="creDate"
+			javaType="java.util.Date" />
+	</resultMap>
+
+	<resultMap type="com.englishvillage.auth.model.MemberDto"
+		id="memberMap">
+
+		<id column="MEMBER_NO" property="memberNo" />
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_EMAIL" property="memberEmail" />
+		<result column="MEMBER_GRADE" property="memberGrade" />
+		<result column="MEMBER_PASSWORD" property="memberPassword" />
+		<result column="MEMBER_POINT" property="memberPoint" />
+		<result column="MEMBER_COUNTRY" property="memberCountry" />
+		<result column="MEMBER_GENDER" property="memberGender" />
+		<result column="MEMBER_BIRTH_DATE" property="memberBirthDate"
+			javaType="java.util.Date" />
+
+	</resultMap>
+
+	<resultMap
+		type="com.englishvillage.member.student.model.QuestionBoardDto"
+		id="questionListResultMap">
+
+
+		<result column="IDX" property="idx" />
+		<result column="RNUM" property="rnum" />
+		<result column="MEMBER_NO" property="no" />
+		<result column="MEMBER_NAME" property="name" />
+		<result column="TITLE" property="title" />
+		<result column="CONTENT" property="content" />
+		<result column="BOARD_CREATE_DATE" property="boardCreateDate"
+			javaType="java.util.Date" />
+		<result column="BOARD_MODIFY_DATE" property="boardModDate"
+			javaType="java.util.Date" />
+		<result column="ANSWER_STATUS" property="answerStatus" />
+		<result column="MEMBER_GRADE" property="grade" />
+		<result column="COMMENT_CREATE_DATE"
+			property="commentCreateDate" javaType="java.util.Date" />
+		<result column="STUDY_NAME" property="studyName" />
+		<result column="TUTOR_NAME" property="tutorName" />
+		<result column="TUTOR_NO" property="tutorNo" />
+		<result column="PRICE" property="price" />
+		<result column="EVALUATE_CHECK" property="evaluateCheck" />
+		<result column="STUDY_DATE" property="studyDate"
+			javaType="java.util.Date" />
+	</resultMap>
+
+	<select id="SelectOne" parameterType="int"
+		resultMap="memberResultMap">
+		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_EMAIL, MEMBER_GRADE,
+		MEMBER_POINT
+		, MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_PASSWORD,
+		MEMBER_BIRTH_DATE
+		FROM MEMBER
+		WHERE MEMBER_NO = #{no}
+	</select>
+
+	<update id="memberUpdateOne" parameterType="MemberDto">
+		UPDATE MEMBER
+		SET
+		MEMBER_MODIFY_DATE = SYSDATE,
+		MEMBER_PASSWORD = #{memberPassword}
+		WHERE
+		MEMBER_EMAIL = #{memberEmail}
+	</update>
+
+	<delete id="memberDeleteOne" parameterType="int">
+		DELETE FROM
+		MEMBER
+		WHERE MEMBER_NO = #{no}
+	</delete>
+
+	<select id="studentStudyCount" parameterType="int"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER M JOIN EVALUATION E
+		ON MEMBER_NO
+		= STUDENT_NO
+		WHERE MEMBER_NO = #{no}
+	</select>
+
+	<select id="studentQuestionCount" parameterType="map"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM QUESTION_BOARD
+		<include refid="quetionSearch"></include>
+		AND MEMBER_NO = #{no}
+	</select>
+
+	<select id="studySelectList" parameterType="map"
+		resultMap="questionListResultMap">
+
+		SELECT RNUM RNUM, IDX, STUDY_NAME, TUTOR_NAME, PRICE, STUDY_DATE,
+		B.TUTOR_NO TUTOR_NO, B.EVALUATE_CHECK
+		FROM (SELECT
+		TUTOR_NO, MEMBER_NAME TUTOR_NAME,
+		STUDY_NAME, PRICE
+		FROM
+		MEMBER M LEFT
+		JOIN TUTOR_INFO T
+		ON MEMBER_NO =
+		TUTOR_NO) A JOIN (SELECT
+		ROWNUM RNUM, IDX, TUTOR_NO, STUDY_DATE,
+		EVALUATE_CHECK
+		FROM (SELECT
+		IDX, TUTOR_NO, STUDY_DATE, EVALUATE_CHECK
+		FROM MEMBER M JOIN EVALUATION
+		E
+		ON MEMBER_NO = STUDENT_NO
+		WHERE MEMBER_NO
+		= ${no})
+		ORDER BY IDX) B
+		ON A.TUTOR_NO = B.TUTOR_NO
+		WHERE RNUM
+		BETWEEN ${start} AND ${end}
+		ORDER BY IDX DESC
+	</select>
+
+	<select id="questionHistory" parameterType="map"
+		resultMap="questionListResultMap">
+
+		SELECT MQ.RNUM, MQ.IDX, MQ.MEMBER_NO, MQ.MEMBER_NAME,
+		MQ.TITLE, MQ.CONTENT,
+		MQ.BOARD_CREATE_DATE, MQ.BOARD_MODIFY_DATE,
+		MQ.ANSWER_STATUS,
+		MQ.MEMBER_GRADE
+		FROM ( SELECT ROWNUM RNUM, Q.IDX,
+		Q.MEMBER_NO,
+		Q.MEMBER_NAME, Q.TITLE, Q.CONTENT,
+		Q.BOARD_CREATE_DATE,
+		Q.BOARD_MODIFY_DATE,
+		Q.ANSWER_STATUS,Q.MEMBER_GRADE
+		FROM (SELECT
+		QUESTION_BOARD.IDX, QUESTION_BOARD.MEMBER_NO, MEMBER.MEMBER_NAME,
+		QUESTION_BOARD.TITLE,
+		QUESTION_BOARD.CONTENT,
+		QUESTION_BOARD.BOARD_CREATE_DATE, QUESTION_BOARD.BOARD_MODIFY_DATE,
+		QUESTION_BOARD.ANSWER_STATUS,
+		MEMBER.MEMBER_GRADE
+		FROM MEMBER
+		JOIN QUESTION_BOARD
+		ON QUESTION_BOARD.MEMBER_NO = MEMBER.MEMBER_NO
+		WHERE MEMBER.MEMBER_NO = ${no}
+		ORDER BY IDX DESC) Q
+		) MQ
+		WHERE MQ.RNUM
+		BETWEEN 1 AND 5
+	</select>
+
+	<select id="studyHistory" parameterType="map"
+		resultMap="questionListResultMap">
+
+		SELECT RNUM RNUM, IDX, STUDY_NAME, TUTOR_NAME, PRICE, STUDY_DATE,
+		B.TUTOR_NO TUTOR_NO
+		FROM (SELECT
+		TUTOR_NO, MEMBER_NAME TUTOR_NAME,
+		STUDY_NAME, PRICE
+		FROM
+		MEMBER M LEFT
+		JOIN TUTOR_INFO T
+		ON MEMBER_NO =
+		TUTOR_NO) A JOIN (SELECT
+		ROWNUM RNUM, IDX, TUTOR_NO, STUDY_DATE,
+		EVALUATE_CHECK
+		FROM (SELECT
+		IDX, TUTOR_NO, STUDY_DATE, EVALUATE_CHECK
+		FROM MEMBER M JOIN EVALUATION
+		E
+		ON MEMBER_NO = STUDENT_NO
+		WHERE MEMBER_NO
+		= ${no})
+		ORDER BY IDX) B
+		ON A.TUTOR_NO = B.TUTOR_NO
+		WHERE RNUM
+		BETWEEN 1 AND 5
+		ORDER BY IDX DESC
+	</select>
+
+	<select id="memberSelectCurPage" parameterType="map"
+		resultType="int">
+		SELECT FLOOR((RNUM-1) / 5)+1 no
+		FROM ( SELECT ROWNUM RNUM, Q.IDX,
+		Q.MEMBER_NO,
+		Q.MEMBER_NAME, Q.TITLE, Q.CONTENT,
+		Q.BOARD_CREATE_DATE,
+		Q.BOARD_MODIFY_DATE,
+		Q.ANSWER_STATUS,Q.MEMBER_GRADE
+		FROM (SELECT
+		QUESTION_BOARD.IDX, QUESTION_BOARD.MEMBER_NO, MEMBER.MEMBER_NAME,
+		QUESTION_BOARD.TITLE,
+		QUESTION_BOARD.CONTENT,
+		QUESTION_BOARD.BOARD_CREATE_DATE, QUESTION_BOARD.BOARD_MODIFY_DATE,
+		QUESTION_BOARD.ANSWER_STATUS,
+		MEMBER.MEMBER_GRADE
+		FROM MEMBER LEFT OUTER
+		JOIN QUESTION_BOARD
+		ON QUESTION_BOARD.MEMBER_NO = MEMBER.MEMBER_NO
+		<include refid="quetionSearch"></include>
+		AND MEMBER.MEMBER_NO = #{no}
+		ORDER BY IDX DESC) Q
+		) MQ
+
+		WHERE IDX = #{idx}
+	</select>
+
+	<select id="questionSelectList" parameterType="map"
+		resultMap="questionListResultMap">
+
+		SELECT MQ.RNUM, MQ.IDX, MQ.MEMBER_NO, MQ.MEMBER_NAME,
+		MQ.TITLE,
+		MQ.CONTENT,
+		MQ.BOARD_CREATE_DATE, MQ.BOARD_MODIFY_DATE,
+		MQ.ANSWER_STATUS,
+		MQ.MEMBER_GRADE
+		FROM ( SELECT ROWNUM RNUM, Q.IDX,
+		Q.MEMBER_NO,
+		Q.MEMBER_NAME, Q.TITLE, Q.CONTENT,
+		Q.BOARD_CREATE_DATE,
+		Q.BOARD_MODIFY_DATE,
+		Q.ANSWER_STATUS,Q.MEMBER_GRADE
+		FROM (SELECT
+		QUESTION_BOARD.IDX, QUESTION_BOARD.MEMBER_NO, MEMBER.MEMBER_NAME,
+		QUESTION_BOARD.TITLE,
+		QUESTION_BOARD.CONTENT,
+		QUESTION_BOARD.BOARD_CREATE_DATE, QUESTION_BOARD.BOARD_MODIFY_DATE,
+		QUESTION_BOARD.ANSWER_STATUS,
+		MEMBER.MEMBER_GRADE
+		FROM MEMBER LEFT OUTER
+		JOIN QUESTION_BOARD
+		ON QUESTION_BOARD.MEMBER_NO = MEMBER.MEMBER_NO
+		<include refid="quetionSearch"></include>
+		AND MEMBER.MEMBER_NO = #{no}
+		ORDER BY IDX DESC) Q
+		) MQ
+		WHERE MQ.RNUM
+		BETWEEN #{start} AND #{end}
+	</select>
+
+	<select id="QuestionSelect" parameterType="map"
+		resultMap="questionListResultMap">
+		SELECT *
+		FROM MEMBER M
+		LEFT OUTER JOIN QUESTION_BOARD Q ON
+		M.MEMBER_NO = q.member_no
+		LEFT OUTER JOIN question_board_comment C ON
+		Q.IDX = C.BOARD_NO
+		WHERE M.MEMBER_NO = #{no}
+		AND Q.IDX = #{idx}
+	</select>
+
+	<insert id="QuestionAdd" parameterType="QuestionBoardDto"
+		useGeneratedKeys="true" keyProperty="idx">
+		<selectKey keyProperty="idx" resultType="int" order="BEFORE">
+			SELECT
+			QUESTION_BOARD_IDX_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+
+		INSERT INTO QUESTION_BOARD
+		VALUE(IDX, MEMBER_NO, TITLE, CONTENT,
+		BOARD_CREATE_DATE, BOARD_MODIFY_DATE,
+		ANSWER_STATUS)
+		VALUES(#{idx},
+		#{no}, #{title}, #{content}, SYSDATE, SYSDATE, 'N')
+	</insert>
+
+	<update id="QuestionRevise" parameterType="QuestionBoardDto">
+		UPDATE QUESTION_BOARD
+		SET
+		TITLE = #{title},
+		CONTENT = #{content},
+		BOARD_MODIFY_DATE =
+		SYSDATE
+		WHERE
+		IDX = #{idx}
+	</update>
+
+	<update id="buyPoint" parameterType="map">
+		UPDATE MEMBER
+		SET
+		MEMBER_POINT = MEMBER_POINT + #{price}
+		WHERE MEMBER_NO = #{no}
+	</update>
+
+</mapper>
+
+
+
+
+

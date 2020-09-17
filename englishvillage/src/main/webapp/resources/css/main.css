@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+body {
+	margin: 0px;
+}
+
+a {
+	text-decoration: none;
+
+}
+
+a:-webkit-any-link {
+    color: white;
+    cursor: pointer;
+}
+
+dl, ul, ol, menu, li {
+	list-style: none;
+	float: left;
+}
+
+#header {
+	position: fixed;
+	width: 100%;
+	height: 140px;
+	color: #fff;
+	/* div 태그 배경색 설정이 노란색으로 설정 */
+	/* transition의 설정은 배경색 설정으로 한다. */
+	transition: background-color 0.2s;
+}
+
+#topHeader {
+	width: 100%;
+	height: 40px;
+	background-color: #202020;
+	color: white;
+	line-height: 7px;
+	padding-left: 1400px;
+}
+
+#topHeaderUl>li {
+margin-right: 30px;
+
+}
+
+#topSpan {
+	float: right;
+	margin-right: 40px;
+	padding: 8px;
+}
+
+.bottomHeader {
+	width: 100%;
+	height: 100px;
+	display: inline-flex;
+}
+
+.logo {
+	font-size: 48px;
+	font-weight: bold;
+	margin: 13px;
+	cursor: pointer;
+}
+
+.logoRight {
+	margin-top: 40px;
+	font-weight: bold;
+	margin-right: 600px;
+}
+
+.headUl>li {
+	font-size: 24px;
+	font-weight: 1000;
+	margin-right: 80px;
+	padding-top: 19px;
+}
+
+#myPage {
+	width: 200px;
+	height: 60px;
+	border-radius: 22px;
+	margin: 18px 30px 0px -17px;
+	background-color: #FFFFBF;
+	box-shadow: 0px 2px 4px grey;
+	border: none;
+	font-size: 24px;
+	font-weight: 1000;
+	cursor: pointer;
+}
+
+#searchBox {
+	width: 1600px;
+	height: 130px;
+	border: 1px solid #707070;
+	margin: auto;
+	padding: 30px;
+	margin-bottom: 50px;
+}
+
+#mainImg {
+	margin-bottom: 30px;
+	width: 100%;
+}
+
+#searchOptBox {
+	width: 800px;
+	height: 60px;
+	background-color: #F2F2F2;
+	padding: 7px;
+	margin: auto;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+#searchOptBox>select {
+	width: 200px;
+	height: 45px;
+	margin-right: 10px;
+	border: 1px solid #d7e0e0;
+	border-radius: 5px;
+	font-size: 15px;
+	text-align: center;
+	padding-left: 10px;
+}
+
+#searchKeyBox {
+	width: 800px;
+	height: 50px;
+	background-color: #F2F2F2;
+	margin: auto;
+	margin-bottom: 20px;
+	padding: 6px 39px;
+	box-sizing: border-box;
+	border-radius: 5px;
+}
+
+.seachFont {
+	font-size: 20px;
+	font-weight: 600;
+	margin-right: 20px;
+	margin-left: 17px;
+}
+
+#keyWordBox {
+	width: 500px;
+	height: 37px;
+	background-color: white;
+	border: 1px solid #d7e0e0;
+	float: left;
+	margin-right: 20px;
+	border-radius: 5px;
+	box-sizing: border-box;
+	padding-top: 5px;
+	padding-left: 10px;
+}
+
+#seachBtn {
+	background-color: skyblue;
+	width: 200px;
+	height: 37px;
+	border-radius: 5px;
+}

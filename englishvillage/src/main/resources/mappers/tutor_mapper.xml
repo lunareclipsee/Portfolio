@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+ "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.englishvillage.member.tutor">
+
+	<sql id="search">
+		<if test="countrySearch != 'all'">
+			AND MEMBER_COUNTRY = #{countrySearch}
+		</if>
+		<if test="ageSearch != 0">
+       		<![CDATA[
+ 	        		AND (CEIL((SYSDATE-MEMBER_BIRTH_DATE)/360) >= #{ageSearch} 
+ 	            	AND CEIL((SYSDATE-MEMBER_BIRTH_DATE)/360) < #{ageSearch}  + 10) 
+            ]]>
+		</if>
+		<if test="genderSearch != 'all'">
+			AND MEMBER_GENDER = #{genderSearch}
+		</if>
+		<if test="keyword != ''">
+			AND UPPER(MEMBER_NAME) LIKE UPPER('%' || #{keyword} || '%')
+		</if>
+	</sql>
+
+
+	<resultMap
+		type="com.englishvillage.member.tutor.model.TutorDto"
+		id="tutorResultMap">
+
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="MEMBER_GRADE" property="memberGrade" />
+		<result column="MEMBER_EMAIL" property="memberEmail" />
+		<result column="MEMBER_PASSWORD" property="memberPassword" />
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_CREATE_DATE" property="memberCreateDate"
+			javaType="java.util.Date" />
+		<result column="MEMBER_MODIFY_DATE" property="memberModifyDate"
+			javaType="java.util.Date" />
+		<result column="MEMBER_COUNTRY" property="memberCountry" />
+		<result column="MEMBER_GENDER" property="memberGender" />
+		<result column="MEMBER_BIRTH_DATE" property="memberBirthDate"
+			javaType="java.util.Date" />
+		<result column="MEMBER_POINT" property="memberPoint" />
+
+		<result column="TUTOR_INTRODUCE" property="tutorIntroduce" />
+		<result column="YOUTUBE_URL" property="youtubeUrl" />
+		<result column="STUDY_NAME" property="studyName" />
+		<result column="PRICE" property="price" />
+		<result column="STATUS_CHECK" property="statusCheck" />
+		<result column="SCORE_AVG" property="score" />
+		<result column="EVALUATION_COUNT" property="evaluationCount" />
+		<result column="TITLE" property="title" />
+
+		<result column="STORE_FILE_NAME" property="storeFileName" />
+
+	</resultMap>
+
+	<resultMap
+		type="com.englishvillage.member.tutor.model.TutorCommentDto"
+		id="tutorCommentResultMap">
+
+		<result column="IDX" property="idx" />
+		<result column="TUTOR_NO" property="tutorNo" />
+		<result column="STUDENT_NO" property="studentNo" />
+		<result column="STUDENT_NAME" property="studentName" />
+		<result column="STUDY_DATE" property="studyDate"
+			javaType="java.util.Date" />
+		<result column="SCORE" property="score" />
+
+		<result column="MEMBER_GRADE" property="memberGrade" />
+
+		<result column="EVALUATE_MODIFY_DATE"
+			property="evaluateModifyDate" javaType="java.util.Date" />
+		<result column="EVALUATE_CREATE_DATE"
+			property="evaluateCreateDate" javaType="java.util.Date" />
+
+		<result column="EVALUATE_CONTENT" property="evaluateContent" />
+		<result column="EVALUATE_CHECK" property="evaluateCheck" />
+
+
+
+	</resultMap>
+	<resultMap
+		type="com.englishvillage.member.admin.model.QuestionBoardDto"
+		id="questionListResultMap">
+
+
+		<result column="IDX" property="idx" />
+		<result column="BOARD_NO" property="boardNo" />
+		<result column="MEMBER_NO" property="no" />
+		<result column="MEMBER_NAME" property="name" />
+		<result column="TITLE" property="title" />
+		<result column="CONTENT" property="content" />
+		<result column="BOARD_CREATE_DATE" property="boardCreateDate" />
+		<result column="BOARD_MODIFY_DATE" property="boardModDate" />
+		<result column="ANSWER_STATUS" property="answerStatus" />
+		<result column="MEMBER_GRADE" property="grade" />
+		<result column="MEMBER_EMAIL" property="email" />
+		<result column="REPLY" property="reply" />
+		<result column="COMMENT_CREATE_DATE" property="commentCreDate" />
+
+	</resultMap>
+
+	<select id="getTutorList" parameterType="map"
+		resultMap="tutorResultMap">
+
+		SELECT MF.RNUM
+		,MF.member_no, MF.member_email, MF.member_name, MF.member_create_date,
+		MF.member_point, MF.member_country
+		,MF.member_gender
+		,MF.grade_name
+		,MF.price, MF.study_name
+		,MF.store_file_name
+		,MF.score_avg
+		,MF.evaluation_count
+		FROM (
+		SELECT ROWNUM RNUM
+		,M.member_no, M.member_email, M.member_name, M.member_create_date, M.member_point,
+		M.member_country, M.member_gender
+		,M.grade_name
+		,M.price, M.study_name
+		,M.store_file_name
+		,M.score_avg
+		,M.evaluation_count
+		FROM(
+		select m.member_no, m.member_email, m.member_name, m.member_create_date,
+		m.member_point, m.member_country, m.member_gender
+		,g.grade_name
+		,t.price, t.study_name
+		,f.store_file_name
+		,s.score_avg
+		,s.evaluation_count
+		from member m, tutor_info t, file_profile_image f, member_grade g
+		,(select t.tutor_no, floor((nvl(avg(e.score),0))) score_avg, count(e.score)
+		evaluation_count
+		from tutor_info t left join EVALUATION e
+		on t.tutor_no = e.tutor_no
+		group by t.tutor_no) s
+		where m.member_no = t.tutor_no
+		and t.tutor_no = f.tutor_no
+		and m.member_grade = g.member_grade
+		and s.tutor_no = t.tutor_no
+		<include refid="search"></include>
+		order by t.status_check asc, m.member_no desc
+		) M
+		) MF
+		WHERE MF.RNUM BETWEEN #{start} AND #{end}
+
+
+	</select>
+
+	<select id="getTutorRankList" parameterType="map"
+		resultMap="tutorResultMap">
+		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.MEMBER_COUNTRY
+		, T.TUTOR_INTRODUCE,
+		T.YOUTUBE_URL, T.STUDY_NAME, T.PRICE, T.STATUS_CHECK
+		, SA.SCORE_AVG
+		,
+		FLOOR(TO_CHAR(SYSDATE - M.MEMBER_BIRTH_DATE) / 365) + 1 AGE
+		,
+		SA.EVALUATION_COUNT
+		, F.store_file_name
+		, M.MEMBER_GENDER
+		,
+		M.MEMBER_BIRTH_DATE
+		, M.MEMBER_EMAIL
+		, M.MEMBER_POINT
+		FROM MEMBER M INNER
+		JOIN TUTOR_INFO T
+		ON M.MEMBER_NO = T.TUTOR_NO
+		LEFT JOIN (SELECT
+		TUTOR_NO, (NVL(AVG(SCORE),0)) SCORE_AVG, COUNT(SCORE) EVALUATION_COUNT
+		FROM EVALUATION
+		GROUP BY TUTOR_NO
+		) SA
+		ON M.MEMBER_NO = SA.TUTOR_NO
+		INNER JOIN (SELECT TUTOR_NO, STORE_FILE_NAME
+		FROM FILE_PROFILE_IMAGE) F
+		ON T.TUTOR_NO = F.TUTOR_NO
+	</select>
+
+	<select id="tutorSelectTotalCount" parameterType="map"
+		resultType="Integer">
+
+		select count(*)
+		from member m, tutor_info t, file_profile_image f,
+		member_grade g
+		,(select t.tutor_no, floor((NVL(AVG(e.score),0))) score_avg
+		from tutor_info t left join EVALUATION e
+		on t.tutor_no = e.tutor_no
+		group by t.tutor_no) s
+		where m.member_no = t.tutor_no
+		and t.tutor_no = f.tutor_no
+		and m.member_grade = g.member_grade
+		and s.tutor_no = t.tutor_no
+		<include refid="search"></include>
+
+	</select>
+
+	<select id="tutorSelectCurPage" parameterType="map"
+		resultType="Integer">
+
+		SELECT floor((RNUM-1)/10)+1
+		FROM ( SELECT ROWNUM RNUM
+		,M.member_no, M.member_email, M.member_name, M.member_create_date, M.member_point,
+		M.member_country
+		,M.grade_name
+		,M.price, M.study_name
+		,M.original_file_name
+		,M.score_avg
+		FROM(
+		select m.member_no, m.member_email, m.member_name, m.member_create_date,
+		m.member_point, m.member_country
+		,g.grade_name
+		,t.price, t.study_name
+		,f.original_file_name
+		,s.score_avg
+		from member m, tutor_info t, file_profile_image f, member_grade g
+		,(select t.tutor_no, floor((nvl(avg(e.score),0))) score_avg
+		from tutor_info t left join EVALUATION e
+		on t.tutor_no = e.tutor_no
+		group by t.tutor_no) s
+		where m.member_no = t.tutor_no
+		and t.tutor_no = f.tutor_no
+		and m.member_grade = g.member_grade
+		and s.tutor_no = t.tutor_no
+		<include refid="search"></include>
+		order by t.status_check asc, m.member_no desc
+		) M
+		)
+		where member_no = #{no}
+	</select>
+	<select id="getTutorInfo" parameterType="int"
+		resultMap="tutorResultMap">
+
+		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_POINT, PRICE, STUDY_NAME,
+		TUTOR_INTRODUCE,
+		MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_GENDER,
+		MEMBER_BIRTH_DATE,
+		FLOOR(TO_CHAR(SYSDATE - M.MEMBER_BIRTH_DATE) / 365)
+		+ 1 AGE, YOUTUBE_URL, MEMBER_COUNTRY,
+		M.MEMBER_GRADE, M.MEMBER_COUNTRY,
+		T.STATUS_CHECK
+		FROM MEMBER M, TUTOR_INFO T
+		WHERE M.MEMBER_NO =
+		T.TUTOR_NO
+		AND M.MEMBER_NO = #{no}
+
+
+
+	</select>
+
+	<insert id="tutorRegister"
+		parameterType="com.englishvillage.member.tutor.model.TutorDto">
+
+		INSERT INTO TUTOR_INFO
+		VALUE(tutor_no, tutor_introduce, youtube_url,
+		study_name, price, status_check)
+		VALUES(#{memberNo}, #{tutorIntroduce},
+		#{youtubeUrl}, #{studyName}, #{price}, 'N')
+
+	</insert>
+
+	<update id="tutorUpdateGrade" parameterType="map">
+
+		update member
+		set member_grade = 'Y'
+		where member_no = #{memberNo}
+
+	</update>
+
+	<select id="getTutorGrade" parameterType="int"
+		resultMap="tutorResultMap">
+
+		SELECT TUTOR_NO, AVG(SCORE) SCORE_AVG
+		FROM EVALUATION
+		WHERE TUTOR_NO = #{no}
+		GROUP BY TUTOR_NO
+
+	</select>
+
+	<select id="getTutorIntroduce" parameterType="map"
+		resultMap="tutorResultMap">
+
+		SELECT M.MEMBER_NO, M.MEMBER_NAME, M.MEMBER_COUNTRY
+		,
+		T.TUTOR_INTRODUCE, T.YOUTUBE_URL, T.STUDY_NAME, T.PRICE,
+		T.STATUS_CHECK
+		, SA.SCORE_AVG
+		, FLOOR(TO_CHAR(SYSDATE -
+		M.MEMBER_BIRTH_DATE) / 365) + 1 AGE
+		, SA.EVALUATION_COUNT
+		,
+		F.store_file_name
+		, M.MEMBER_GENDER
+		, M.MEMBER_BIRTH_DATE
+		,
+		M.MEMBER_EMAIL
+		, M.MEMBER_POINT
+		FROM MEMBER M INNER JOIN TUTOR_INFO T
+		ON
+		M.MEMBER_NO = T.TUTOR_NO
+		LEFT JOIN (SELECT TUTOR_NO,
+		(NVL(AVG(SCORE),0)) SCORE_AVG, COUNT(SCORE) EVALUATION_COUNT
+		FROM EVALUATION
+		GROUP BY TUTOR_NO) SA
+		ON M.MEMBER_NO = SA.TUTOR_NO
+		INNER JOIN (SELECT TUTOR_NO, STORE_FILE_NAME
+		FROM FILE_PROFILE_IMAGE) F
+		ON T.TUTOR_NO = F.TUTOR_NO
+		WHERE M.MEMBER_NO = #{tutorNo}
+
+		<!-- SELECT MEMBER_NO, MEMBER_NAME, MEMBER_POINT, PRICE, STUDY_NAME, TUTOR_INTRODUCE, -->
+		<!-- MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_GENDER, MEMBER_BIRTH_DATE, -->
+		<!-- FLOOR(TO_CHAR(SYSDATE - M.MEMBER_BIRTH_DATE) / 365) + 1 AGE, YOUTUBE_URL, 
+			MEMBER_COUNTRY, -->
+		<!-- M.MEMBER_GRADE, M.MEMBER_COUNTRY, T.STATUS_CHECK -->
+		<!-- FROM MEMBER M, TUTOR_INFO T -->
+		<!-- WHERE M.MEMBER_NO = T.TUTOR_NO -->
+		<!-- AND M.MEMBER_NO = #{no} -->
+
+	</select>
+
+
+	<select id="getTutorComments" parameterType="int"
+		resultMap="tutorCommentResultMap">
+
+		SELECT IDX, TUTOR_NO, STUDENT_NO, SCORE, EVALUATE_CONTENT, STUDENT_NAME,
+		EVALUATE_CREATE_DATE, STUDY_DATE
+		FROM EVALUATION
+		WHERE EVALUATE_CHECK =
+		'Y'
+		AND TUTOR_NO = #{tutorNo}
+		ORDER BY IDX DESC
+
+	</select>
+
+	<select id="tutorBoardList" parameterType="map"
+		resultMap="questionListResultMap">
+
+		SELECT PB.RNUM, PB.IDX, PB.MEMBER_NO, PB.MEMBER_NAME, PB.TITLE,
+		PB.BOARD_CREATE_DATE, PB.ANSWER_STATUS, PB.CONTENT
+		FROM (
+		select ROWNUM RNUM, b.IDX, B.MEMBER_NO, B.MEMBER_NAME, B.TITLE,
+		B.BOARD_CREATE_DATE, B.ANSWER_STATUS, B.CONTENT
+		from (
+		SELECT Q.IDX, T.MEMBER_NO, T.MEMBER_NAME, Q.TITLE, Q.BOARD_CREATE_DATE,
+		Q.ANSWER_STATUS, Q.CONTENT
+		FROM QUESTION_BOARD Q JOIN MEMBER T
+		ON Q.MEMBER_NO = T.MEMBER_NO
+		WHERE Q.MEMBER_NO = #{no}
+		ORDER BY Q.BOARD_CREATE_DATE DESC
+		) B
+		)pb
+		WHERE PB.RNUM BETWEEN #{start} AND #{end}
+
+	</select>
+
+	<update id="writeComment"
+		parameterType="com.englishvillage.member.tutor.model.TutorCommentDto">
+
+		update evaluation
+		set score = #{score}, evaluate_content =
+		#{evaluateContent}, evaluate_create_date = sysdate, evaluate_check =
+		'Y'
+		where student_no = #{studentNo}
+		and tutor_no = #{tutorNo}
+
+
+	</update>
+
+	<update id="modifyComment"
+		parameterType="com.englishvillage.member.tutor.model.TutorCommentDto">
+
+		update evaluation
+		set score = #{score}, evaluate_content = #{evaluateContent}
+		where student_no = #{studentNo}
+		and tutor_no = #{tutorNo}
+
+
+	</update>
+
+	<delete id="removeComment"
+		parameterType="com.englishvillage.member.tutor.model.TutorCommentDto">
+
+		update evaluation
+		set score = null, evaluate_content = null,
+		evaluate_create_date = null, evaluate_check = 'N'
+		where student_no =
+		#{studentNo}
+		and tutor_no = #{tutorNo}
+
+	</delete>
+
+
+
+	<select id="boardSelect" parameterType="int"
+		resultMap="tutorResultMap">
+
+		SELECT ROWNUM, IDX, TITLE
+		FROM (
+		SELECT IDX, TITLE
+		FROM QUESTION_BOARD
+		WHERE MEMBER_NO = #{no}
+		ORDER BY BOARD_CREATE_DATE DESC, IDX DESC)
+		WHERE ROWNUM = 1
+
+	</select>
+
+	<update id="updateTutor"
+		parameterType="com.englishvillage.member.tutor.model.TutorDto">
+
+		UPDATE TUTOR_INFO
+		SET PRICE = #{price}, youtube_Url = #{youtubeUrl},
+		STUDY_NAME = #{studyName}, TUTOR_INTRODUCE = #{tutorIntroduce}
+		WHERE
+		TUTOR_NO = #{memberNo}
+
+	</update>
+
+	<update id="updatePwd"
+		parameterType="com.englishvillage.member.tutor.model.TutorDto">
+
+		UPDATE MEMBER
+		SET MEMBER_PASSWORD = #{memberPassword}
+		WHERE MEMBER_NO =
+		#{memberNo}
+
+	</update>
+
+	<delete id="deleteMember" parameterType="int">
+
+		DELETE FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+
+	</delete>
+
+
+
+
+
+	<insert id="addStudyHistory"
+		parameterType="com.englishvillage.member.tutor.model.TutorCommentDto">
+
+		<!-- 수업시작했을때 학생번호 튜터번호 학생이름 날짜를 평가테이블에 추가 -->
+
+		insert into evaluation
+		value(IDX, TUTOR_NO, STUDENT_NO, SCORE, EVALUATE_CONTENT, EVALUATE_CHECK,
+		STUDENT_NAME, EVALUATE_CREATE_DATE, STUDY_DATE)
+		values(EVALUATION_IDX_SEQ.nextval, #{tutorNo}, #{studentNo}, null,
+		null, 'N', #{studentName}, null, SYSDATE)
+
+	</insert>
+
+	<insert id="boardWrite"
+		parameterType="com.englishvillage.member.admin.model.QuestionBoardDto">
+
+		INSERT INTO QUESTION_BOARD
+		VALUE(IDX, MEMBER_NO, TITLE
+		, CONTENT, BOARD_CREATE_DATE, BOARD_MODIFY_DATE
+		, ANSWER_STATUS)
+		VALUES(QUESTION_BOARD_IDX_SEQ.NEXTVAL, #{no} ,#{title}
+		, #{content}, SYSDATE, SYSDATE, 'N')
+
+	</insert>
+
+	<insert id="insertFile" parameterType="map">
+
+		INSERT INTO file_profile_image
+		(IDX, TUTOR_NO, ORIGINAL_FILE_NAME,
+		STORE_FILE_NAME, FILE_SIZE, FILE_CREATE_DATE)
+		VALUES(
+		FILE_PROFILE_IMAGE_IDX_SEQ.NEXTVAL, #{tutorNo}, #{originalFileName},
+		#{storeFileName}, #{fileSize}, SYSDATE
+		)
+
+	</insert>
+
+	<select id="getStudentTutorComment"
+		parameterType="com.englishvillage.member.tutor.model.TutorCommentDto"
+		resultMap="tutorCommentResultMap">
+
+		SELECT IDX, TUTOR_NO, STUDENT_NO, SCORE, EVALUATE_CONTENT,
+		EVALUATE_CHECK, STUDENT_NAME, EVALUATE_CREATE_DATE, STUDY_DATE
+		FROM (
+		SELECT IDX, TUTOR_NO, STUDENT_NO, SCORE, EVALUATE_CONTENT, EVALUATE_CHECK,
+		STUDENT_NAME, EVALUATE_CREATE_DATE, STUDY_DATE
+		FROM EVALUATION
+		WHERE TUTOR_NO = #{tutorNo}
+		AND STUDENT_NO = #{studentNo}
+		ORDER BY EVALUATE_CHECK DESC
+		)
+	  <![CDATA[  WHERE ROWNUM <= 1  ]]>
+
+	</select>
+
+	<select id="boardSelectOne" parameterType="int"
+		resultMap="questionListResultMap">
+
+		SELECT Q.IDX BOARD_NO, Q.MEMBER_NO, Q.TITLE, Q.CONTENT, Q.BOARD_CREATE_DATE
+		, Q.BOARD_MODIFY_DATE, Q.ANSWER_STATUS, C.IDX, C.COMMENT_CREATE_DATE
+		, C.REPLY, C.ADMIN_NO
+
+		FROM QUESTION_BOARD Q LEFT JOIN QUESTION_BOARD_COMMENT C
+		ON Q.IDX =
+		C.BOARD_NO
+
+		WHERE Q.IDX = #{idx}
+
+	</select>
+
+	<update id="changeTutorStatus"
+		parameterType="com.englishvillage.member.tutor.model.TutorDto">
+
+		<!-- set을 if로 주고 강사 status가 Y일때 N N일때 Y로 바꾸기 -->
+		UPDATE TUTOR_INFO
+
+		<set>
+			<if test='statusCheck == "Y"'>STATUS_CHECK = 'N'</if>
+			<if test='statusCheck == "N"'>STATUS_CHECK = 'Y'</if>
+		</set>
+		WHERE TUTOR_NO = #{memberNo}
+
+	</update>
+
+	<update id="addPount" parameterType="map">
+
+		<!-- set을 if로 주고 강사 status가 Y일때 N N일때 Y로 바꾸기 -->
+		UPDATE MEMBER
+		SET MEMBER_POINT = MEMBER_POINT + #{price}
+		WHERE MEMBER_NO
+		= #{memberNo}
+
+	</update>
+
+	<update id="questionRevise"
+		parameterType="com.englishvillage.member.admin.model.QuestionBoardDto">
+
+		UPDATE QUESTION_BOARD
+		SET
+		TITLE = #{title},
+		CONTENT =
+		#{content},
+		BOARD_MODIFY_DATE =
+		SYSDATE
+		WHERE
+		IDX = #{idx}
+
+	</update>
+
+
+
+
+	<delete id="fileDelete" parameterType="int">
+		DELETE FROM FILE_PROFILE_IMAGE
+		WHERE IDX = #{idx}
+	</delete>
+
+	<select id="fileSelectStoreFileName" parameterType="int"
+		resultType="com.englishvillage.member.admin.model.MemberListDto">
+		SELECT IDX, STORE_FILE_NAME
+		FROM FILE_PROFILE_IMAGE
+		WHERE TUTOR_NO =
+		#{memberNo}
+	</select>
+
+	<update id="TutorProfileUpdateOne"
+		parameterType="com.englishvillage.member.admin.model.MemberListDto">
+		UPDATE TUTOR_INFO SET
+		YOUTUBE_URL = #{youtubeUrl},
+		PRICE = #{price},
+		STUDY_NAME = #{title},
+		TUTOR_INTRODUCE = #{tutorIntroduce}
+		WHERE TUTOR_NO = #{memberNo}
+	</update>
+
+
+	<select id="boardSelectTotalCount" parameterType="int"
+		resultType="int">
+		SELECT count(*)
+		FROM QUESTION_BOARD Q JOIN MEMBER T
+		ON Q.MEMBER_NO = T.MEMBER_NO
+		WHERE Q.MEMBER_NO = #{no}
+		ORDER BY
+		Q.BOARD_CREATE_DATE DESC
+	</select>
+
+
+	<select id="tutorBoardCurPage" parameterType="map"
+		resultType="Integer">
+
+		SELECT floor((RNUM-1)/5)+1
+		FROM (
+		select ROWNUM RNUM, b.IDX, B.MEMBER_NO, B.MEMBER_NAME, B.TITLE,
+		B.BOARD_CREATE_DATE, B.ANSWER_STATUS, B.CONTENT
+		from (
+		SELECT Q.IDX, T.MEMBER_NO, T.MEMBER_NAME, Q.TITLE, Q.BOARD_CREATE_DATE,
+		Q.ANSWER_STATUS, Q.CONTENT
+		FROM QUESTION_BOARD Q JOIN MEMBER T
+		ON Q.MEMBER_NO = T.MEMBER_NO
+		WHERE Q.MEMBER_NO = #{no}
+		ORDER BY Q.BOARD_CREATE_DATE DESC
+		) B
+		)pb
+
+		WHERE pb.idx = #{idx}
+
+	</select>
+
+
+</mapper>
+
+
+
+

@@ -1,0 +1,533 @@
+--MEMBER_GRADE
+insert into member_grade values('A', '관리자');
+insert into member_grade values('N', '학생');
+insert into member_grade values('Y', '강사');
+
+select * from member_grade;
+
+--MEMBER 테이블
+
+insert into member values(0, 'dd@dd.dd', 'dd', '디디', SYSDATE, SYSDATE, 'KOREA', 'M', '1996-10-04', 99999999, 'A');
+
+insert into member values(1,'chan@naver.com','test1','이찬양','2020-06-10','2020-06-20','KOREA','M','1998-05-02',0,'N');
+
+insert into member
+value(MEMBER_NO,MEMBER_EMAIL,MEMBER_PASSWORD,MEMBER_NAME,MEMBER_CREATE_DATE,MEMBER_MODIFY_DATE,MEMBER_COUNTRY,MEMBER_GENDER,MEMBER_BIRTH_DATE,MEMBER_POINT,MEMBER_GRADE)
+values(2,'smith@gmail.com','test1','SMITH','2020-05-18','2020-06-21','USA','M','1996-10-04',10000,'Y');
+
+insert into member values(3,'khabib@gmail.com','test3','Khabib Nurmag','2020-05-18','2020-07-30','USA','M','1992-03-18',10000,'Y');
+insert into member values(4,'stipe@gmail.com','test4','Stipe Miocic','2019-11-14','2019-11-30','USA','F','1998-01-01',1000,'Y');
+insert into member values(5,'israel@gmail.com','test5','Irael Adnya','2019-11-24','2020-09-29','USA','F','1995-06-28',20000,'Y');
+insert into member values(6,'daniel@gmail.com','test6','Daiel Coier','2020-06-14','2019-12-09','USA','F','1987-07-20',0,'Y');
+insert into member values(7,'kamaru@gmail.com','test7','Kamu Usan','2018-03-03','2019-12-10','USA','F','1997-08-21',1000,'Y');
+insert into member values(8,'alexander@gmail.com','test8','Aladr Vlnosi','2020-12-12','2020-05-18','USA','F','1993-02-10',20000,'Y');
+insert into member values(9,'conor@gmail.com','test9','Conor MGrgr','2020-01-02','2020-12-25','USA','F','1992-03-18',39000,'Y');
+insert into member values(10,'max@gmail.com','test10','Max Holw','2019-11-16','2019-12-11','USA','F','1992-03-17',58000,'Y');
+insert into member values(11,'justin@gmail.com','test11','Jusi Ghje','2020-01-04','2020-06-13','USA','M','1997-08-21',77000,'Y');
+insert into member values(12,'dustin@gmail.com','test12','Duin Prier','2018-01-06','2019-11-12','USA','M','1987-07-20',96000,'Y');
+insert into member values(13,'tony@gmail.com','test13','Tony Feron','2019-05-05','2019-11-25','USA','M','1997-08-23',0,'Y');
+insert into member values(14,'robert@gmail.com','test14','Robrt Wker','2019-11-20','2020-06-07','USA','M','1992-03-16',0,'Y');
+insert into member values(15,'francis@gmail.com','test15','Frai gou','2020-01-08','2019-11-27','USA','M','1998-05-04',0,'Y');
+insert into member values(16,'dominick@gmail.com','test16','Domick Ryes','2020-05-18','2020-06-02','USA','M','1998-10-10',0,'Y');
+insert into member values(17,'deiveson@gmail.com','test17','Deson Figdo','2019-11-22','2019-11-29','USA','M','1998-05-03',0,'Y');
+insert into member values(18,'joseph@gmail.com','test18','Josh Beidez','2019-12-15','2020-06-08','USA','F','1992-03-15',210000,'Y');
+insert into member values(19,'brandon@gmail.com','test19','Brandn Moreno','2020-01-05','2019-12-06','USA','F','1997-08-22',10000,'Y');
+insert into member values(20,'alexandre@gmail.com','test20','Aldre Pantoja','2020-05-18','2019-12-03','Ireland','F','1993-02-22',20000,'Y');
+insert into member values(21,'alex@gmail.com','test21','Alex Perez','2019-12-04','2019-12-16','Ireland','F','1992-11-11',20000,'Y');
+insert into member values(22,'jussier@gmail.com','test22','Jsier Foiga','2020-06-11','2020-01-08','Ireland','F','1992-03-19',0,'Y');
+insert into member values(23,'askar@gmail.com','test23','Askar Aarov','2019-11-26','2020-05-18','Ireland','F','1992-03-20',20000,'Y');
+insert into member values(24,'kai@gmail.com','test24','Kaara Fance','2020-01-07','2019-11-22','Ireland','F','1992-12-12',0,'Y');
+insert into member values(25,'rogerio@gmail.com','test25','Roio Borin','2019-12-07','2019-12-15','Ireland','M','1992-03-22',10000,'Y');
+insert into member values(26,'matt@gmail.com','test26','Matt Scell','2020-06-12','2020-01-05','Ireland','M','1990-12-28',50000,'Y');
+insert into member values(27,'jordan@gmail.com','test27','Joran Enosa','2019-12-08','2020-05-18','Ireland','M','1992-03-24',50000,'Y');
+insert into member values(28,'tim@gmail.com','test28','Tim Eott','2017-08-07','2019-12-04','Ireland','M','1993-02-20',10000,'Y');
+insert into member values(29,'raulian@gmail.com','test29','Rian Pava','2019-12-14','2020-06-11','Ireland','M','1993-02-21',50000,'Y');
+insert into member values(30,'daivd@gmail.com','test30','Did Dvok','2017-08-22','2019-11-26','Canada','M','1992-03-27',10000,'Y');
+insert into member values(31,'marlon@gmail.com','test31','Malon Moaes','2020-01-06','2020-01-07','Canada','F','1995-12-28',50000,'Y');
+insert into member values(32,'aljamain@gmail.com','test32','Aljin Steng','2020-07-30','2019-12-07','Canada','F','1992-03-29',50000,'Y');
+insert into member values(33,'peter@gmail.com','test33','Peter Yan','2019-11-30','2020-06-12','Canada','F','1993-02-19',50000,'Y');
+insert into member values(34,'cory@gmail.com','test34','Cory Sagen','2020-09-29','2019-12-08','Canada','F','1999-06-19',115000,'Y');
+insert into member values(35,'cody@gmail.com','test35','Cody Gadt','2019-12-09','2017-08-07','Canada','F','1992-12-04',134000,'Y');
+insert into member values(36,'jose@gmail.com','test36','Jose Aldo','2019-12-10','2019-12-14','Canada','F','1992-04-02',153000,'Y');
+insert into member values(37,'pedro@gmail.com','test37','Pedro Munoz','2020-05-18','2017-08-22','Canada','F','1993-02-18',172000,'Y');
+insert into member values(38,'raphael@gmail.com','test38','Raael Ascao','2020-12-25','2020-01-06','Canada','F','1995-05-05',191000,'Y');
+insert into member values(39,'jimmie@gmail.com','test39','Jimie Rivera','2019-12-11','2020-07-30','Canada','F','1988-05-05',0,'Y');
+insert into member values(40,'rob@gmail.com','test40','Rob Font','2020-06-13','2019-11-30','Canada','F','1992-03-23',10000,'Y');
+insert into member values(41,'john@gmail.com','test41','John Dodson','2019-11-12','2020-09-29','England','F','1999-06-18',50000,'Y');
+insert into member values(42,'sean@gmail.com','test42','SeanO Maey','2019-11-28','2019-12-09','England','F','1980-07-07',20000,'Y');
+insert into member values(43,'song@gmail.com','test43','Song Yang','2020-04-14','2020-06-07','England','M','1987-07-20',0,'Y');
+insert into member values(44,'brian@gmail.com','test44','Brian Orga','2020-05-18','2019-11-27','England','M','1997-08-23',50000,'Y');
+insert into member values(45,'zabit@gmail.com','test45','Zabit Maov','2019-12-13','2020-06-02','England','M','1999-06-17',0,'Y');
+insert into member values(46,'yair@gmail.com','test46','Yair Roez','2020-06-01','2019-11-29','England','M','1992-03-26',20000,'Y');
+insert into member values(47,'calvin@gmail.com','test47','Cvin Katar','2020-01-03','2020-06-08','England','M','1998-05-04',50000,'N');
+insert into member values(48,'frankie@gmail.com','test48','Fraie Edgar','2019-11-11','2019-12-06','England','M','1998-05-05',50000,'N');
+insert into member values(49,'josh@gmail.com','test49','Josh Emett','2020-06-01','2019-12-03','England','F','1993-02-17',60000,'N');
+insert into member values(50,'jeremy@gmail.com','test50','Jemy Sens','2019-11-13','2019-12-16','England','F','1988-11-11',70000,'N');
+insert into member values(51,'shane@gmail.com','test51','Shane Burgs','2019-12-12','2020-05-18','England','F','1999-06-16',80000,'N');
+insert into member values(52,'arnold@gmail.com','test52','Arnld Allen','2019-11-15','2019-11-22','England','F','1992-03-28',90000,'N');
+insert into member values(53,'jessica@gmail.com','test53','Jessa Anade','2020-06-01','2019-12-15','USA','F','1993-02-26',100000,'N');
+insert into member values(54,'rose@gmail.com','test54','Rose Najas','2019-11-17','2020-01-05','USA','F','1981-06-07',0,'N');
+insert into member values(55,'tatiana@gmail.com','test55','Tana Suarez','2019-11-18','2020-05-18','USA','F','1992-03-25',0,'N');
+insert into member values(56,'joanna@gmail.com','test56','Joana Jedrk','2019-11-19','2019-12-04','USA','F','1999-06-15',0,'N');
+insert into member values(57,'nina@gmail.com','test57','Nina Ansf','2020-06-01','2020-06-11','USA','F','1989-11-11',0,'N');
+insert into member values(58,'claudia@gmail.com','test58','Claia Gaha','2019-11-21','2019-11-26','USA','M','1992-03-30',70000,'N');
+insert into member values(59,'carla@gmail.com','test59','Carla Esza','2020-06-04','2020-01-07','USA','M','1998-05-06',70000,'N');
+insert into member values(60,'michelle@gmail.com','test60','Mile Waton','2019-11-23','2020-05-17','USA','M','1993-02-16',60000,'N');
+insert into member values(61,'marina@gmail.com','test61','Mara Roez','2020-06-05','2019-03-17','Ireland','M','1993-02-25',70000,'N');
+insert into member values(62,'yan@gmail.com','test62','Yan Xian','2019-11-25','2020-12-04','Ireland','M','1985-05-12',60000,'N');
+insert into member values(63,'tecia@gmail.com','test63','Tecia Torres','2020-06-07','2019-03-19','Ireland','M','1992-03-21',70000,'N');
+insert into member values(64,'alexa@gmail.com','test64','Alexa Grasso','2019-11-27','2020-12-28','Ireland','M','1993-02-24',60000,'N');
+insert into member values(65,'angela@gmail.com','test65','Angela Hill','2020-06-02','2019-03-18','Ireland','F','1999-06-14',0,'N');
+insert into member values(66,'amanda@gmail.com','test66','Amanda Ribas','2019-11-29','2017-03-15','Ireland','F','1998-10-10',60000,'N');
+insert into member values(67,'felice@gmail.com','test67','Felice Herrig','2020-06-08','2018-12-28','Ireland','F','1999-06-13',20000,'N');
+
+
+select * from member;
+--TUTOR_INFO 테이블
+
+insert into TUTOR_INFO
+value(TUTOR_NO, TUTOR_INTRODUCE, YOUTUBE_URL, STUDY_NAME, PRICE, STATUS_CHECK)
+values(2, '저는 케임브릿지 대학교 출신입니다 ', 'https://www.youtube.com/embed/u6R1DeCez9s', '[1:1] 즐거운 영어수업', 15000, 'N');
+
+insert into tutor_info values(3,'3천명이 학생들이 들었던 바로 그 강의! 한번 들어보시겠어요?!','https://www.youtube.com/embed/L0XYa01AktA','왕초보 탈출!! 1~3탄',500000,'N');
+insert into tutor_info values(4,'단어를 쉽게 외우는 방법을 알려드려요! ','https://www.youtube.com/embed/09a3arhxq6w','효과적인 영어단어 암기법!',20000,'N');
+insert into tutor_info values(5,'일상에서 자주 사용되는 단어들을 가르쳐 드립니다!','https://www.youtube.com/embed/ufuhlxJjz1w','기적의 말하기 영단어 2000',30000,'N');
+insert into tutor_info values(6,'60대, 70대를 위한 영어 실버 영어 클래스!','https://www.youtube.com/embed/R7Vuh1vBM2I','[60~70대를 위한] 실버영어',28000,'N');
+insert into tutor_info values(7,'인물, 사물, 장소, 묘사 등등 사람, 장소 사물에 대한 묘사를 세밀하게 표현할 수 있게 됩니다!','https://www.youtube.com/embed/qnA1fk_2ZFU','인물! 사물! 장소! 묘사해보자!',29000,'N');
+insert into tutor_info values(8,'안녕하세요 Kamaru Usman 강사입니다. ','https://www.youtube.com/embed/d0iJo-8gWSs','[1:1] Hello, this is english study',30000,'N');
+insert into tutor_info values(9,'반복학습은 이제 그만! 이 수업을 들으면 당신도 영어 고수!','https://www.youtube.com/embed/i4ZORQUUx5E','반복학습은 이제 그만! 창의적인 수업으로 영어를 향상시키자!',22000,'N');
+insert into tutor_info values(10,'회화위주의 수업으로 유학, 이민을 생각하고 있는 사람이라면 도움이 됩니다!','https://www.youtube.com/embed/82kG_8roc0A','회화 위주의 재밌는 영어 수업',23000,'N');
+insert into tutor_info values(11,'사자마자 50% 현금환급! 목표점수 달성하면 최대 300% 추가환급까지! 토익을 처음하는 왕초보도 쉽고 빠르게 토익졸업 토익문법+RC+LC, 탄탄하게 완성하고 650+달성!','https://www.youtube.com/embed/a_BrkCa7WmA','시작이 반 토익 환급반',16000,'N');
+insert into tutor_info values(12,'하루 2시간, 15일이면 토린이도 550점 쉽게 완성! 첫 토익 응시료 100% 환급부터 토린이 맞춤 케어까지! ★EVENT★ 오픈기념 3만원 할인','https://www.youtube.com/embed/il8ClautXrs','처음토익 패키지',20000,'N');
+insert into tutor_info values(13,'글의 소재 찾는 방법부터 퇴고 방법까지 4주 과정에 걸친 글쓰기에 관한 맞춤형 수업 진행','https://www.youtube.com/embed/XGVkbSoCoSE','1:1 맞춤형 글쓰기 책 쓰기 레슨 드립니다.',30000,'N');
+insert into tutor_info values(14,'반복적인 트레이닝을 통한 스피치 능력 향상 컨설팅 발음교정과, 언어 습관 보완 등 세분화된 수업 진행','https://www.youtube.com/embed/-dryf11f29E','맞춤 스피칭 컨설팅을 화상으로 해 드립니다.',33000,'N');
+insert into tutor_info values(15,'100% 직접 제작한 수업자료 (스피킹/리스닝/리딩/라이팅 전반적인 영어 실력 향상 가능하도록 고안)','https://www.youtube.com/embed/a8toKhLWKhI4','1대1 성인영어회화 전문강사와 온라인Live 수업 드립니다.',24000,'N');
+insert into tutor_info values(16,'나만의 그림책만들기(소프트) 나만의 그림책 만들기(더미북)과정입니다. 소프트제본형식으로 출판합니다.','https://www.youtube.com/embed/gUF4pFRJIUQ','나만의 그림책을 만드는 법을 알려 드립니다.',25000,'N');
+insert into tutor_info values(17,'1:1 영어회화 2달 수업 주 1회, 8주동안 총 8회 수업 (주당 횟수 추가 가능)','https://www.youtube.com/embed/tKv9OpZ5YRY','1대1 영어회화 프리토킹 수업을 저렴한 가격에 한 달 동안 제공해 드립니다.',33000,'N');
+insert into tutor_info values(18,'비즈니스/프리젠테이션 진행 등 기업 및 개인 실무 비즈니스 서비스 개별 컨텐츠와 거리 등 따른 변동 가능','https://www.youtube.com/embed/4XM2hpEzV_4','실전 글로벌 경험 영어 면접 영어회화 비즈니스 발표 행사 레슨 드립니다.',31000,'N');
+insert into tutor_info values(19,'영어 회화 레슨 학생의 선호에 적합한 컨텐츠 선별','https://www.youtube.com/embed/nlJrz-THTPU','마치 미국에 있는것 처럼 영어 회화를 해드립니다.',32000,'N');
+insert into tutor_info values(20,'기업 영어 면접 및 입사 준비 레슨 기업 영어 면접 (국내 한글 면접 가능) 및 입시 준비 레슨 (한시간기준측정).맞춰 횟수 조정 가능','https://www.youtube.com/embed/kLBRhy3McMs','면접 질문 위주의 영어 수업 알려드립니다.',50000,'N');
+insert into tutor_info values(21,'현재 강사활동중이지만 저도 영어가 어려울때가 있었습니다 저를 믿고 따라와주세요','https://www.youtube.com/embed/tGloaud-_38','이거면 된다! 한방에 끝내는 영어!',34000,'N');
+insert into tutor_info values(22,'인천 제물포스마트타운 강의 저희 강의실에 직접오셔서 수업받으실 때 입니다.','https://www.youtube.com/embed/oZRvJ7Kp7yE','6시간만에 영.문.법. 끝내 드립니다.',35000,'N');
+insert into tutor_info values(23,'(비즈니스) 면접/오픽 준비 학생의 수준/요청에 맞는 속성 40분 면접 준비 수업입니다.','https://www.youtube.com/embed/wi8ipxsdpLk','영어면접 영어프레젠테이션 코칭해 드립니다.',10000,'N');
+insert into tutor_info values(24,'(비즈니스) 영어 프레젠테이션 자신감있고 설득력 있는 영어프레젠테이션을 기획/연습','https://www.youtube.com/embed/5-NFTWa9QK8','해외 취업을 위한 영어 프레젠테이션 강의',10000,'N');
+insert into tutor_info values(25,'1 단계 원데이클래스 패키지로 신청하지 않고 개별신청하시는 분들은 신청해주세요. 2단계만 신청하실 분들도 이것으로 신청해주세요.','https://www.youtube.com/embed/FmQ259r3vxM','국내에서 발음교정 후 네이티브가 된 비법 공개해 드립니다.',40000,'N');
+insert into tutor_info values(26,'1, 2 단계 원데이클래스 1, 2단계 원데이클래스 패키지입니다. 할인 된 가격에 신청하실 수 있습니다.','https://www.youtube.com/embed/0QwhzMxAiOI','당신도 할 수 있습니다! 발음 교정',50000,'N');
+insert into tutor_info values(27,'1:1 영어회화 1개월','https://www.youtube.com/embed/3YWkQneaRmg','English Speaking Tutoring을 해 드립니다.',10000,'N');
+insert into tutor_info values(28,'온라인 초급 영어에 대한 두려움을 없애고 영어 말하기를 편하게 해드립니다','https://www.youtube.com/embed/e7ZLzqd7_Q8','영어회화 실력 확실히 업그레이드, 영어공포증 탈출 시켜 드립니다.',17000,'N');
+insert into tutor_info values(29,'중급 영어에 대한 지식은 있으시지만 머리로 생각하고 말하는 습관을 고쳐드립니다 15분','https://www.youtube.com/embed/vfUqQ8gyKsE','누구나 쉽게 할 수 있는 영어! 중급 난이도',18000,'N');
+insert into tutor_info values(30,'면접 및 비지니스 목적 면접 혹은 출장을 위한 영어를 원하시는 분들꼐 맞춤 수업입니다','https://www.youtube.com/embed/pCArASOlr8U','[고급] 전문가가 되고 싶습니까?? 바로 신청하세요',19000,'N');
+insert into tutor_info values(31,'언제든지 어디에서든 편할때 수업할수 있는게 장점입니다. 카톡 수업시간에는 질문을 하고 피드백을 받습니다.','https://www.youtube.com/embed/S6GHzMfHvF0','영어회화 리스닝 귀를 뚫어 드립니다.',20000,'N');
+insert into tutor_info values(32,'온라인 원격 코칭 밀착 멘토링 받고, 개성있는 발음과 영어 실력을 만들어보세요!','https://www.youtube.com/embed/G00kYyVJyg0','섹시한 영국식 발음을 만들어 드립니다.',10000,'N');
+insert into tutor_info values(33,'온라인 초급 영어에 대한 두려움을 없애고 영어 말하기를 편하게 해드립니다','https://www.youtube.com/embed/n3MfBI3Xxqg','18년 경력 원어민 선생님이 일대일로 영어 능력 향상시켜 드립니다.',10000,'N');
+insert into tutor_info values(34,'영어발음교정과 말하기 영어발음교정 15분 롤플레잉 15분 연설 10분','https://www.youtube.com/embed/p3ri5nLud0s','발음교정을 통한 영어 말하기 드립니다.',26000,'N');
+insert into tutor_info values(35,'영어로 짧은 일상 대화 및 토론 중간중간 발음 및 문법교정(원어민과 소통가능해야함)','https://www.youtube.com/embed/U2pvtVPcano','미국인 영어회화 화상 수업해 드립니다.',27000,'N');
+insert into tutor_info values(36,'학생 레벨에 맞춘 스피킹, 그래머, 비지니스 영어, 단어, 표현','https://www.youtube.com/embed/WI2kq8NoreQ','완벽한 영어 수업을 제공하여 드립니다.',28000,'N');
+insert into tutor_info values(37,'English Class 필요하신 내용과 레슨을 원하시는 방향을 확실하게 제공해주시는 경우 그에 맞게 진행해드립니다.','https://www.youtube.com/embed/nrC7r4T9TAU','맞춤형! 영어 레슨! [중급]',29000,'N');
+insert into tutor_info values(38,'English CONV Class 맞춤으로 진행되는 수업입니다. 필요하신 수업내용에 대해서 상담 후 그에 맞는 수업 제공해드립니다.','https://www.youtube.com/embed/Bd3j2qWky84','서로 맞춰가면서 하는 영어 수업',30000,'N');
+insert into tutor_info values(39,'TOEIC Class 목표하시는 점수에 맞는 커리큘럼을 가이드해드려서 이를 통해 수업을 진행합니다.','https://www.youtube.com/embed/BZOIEsBOIs4','놀면서 하는 영어! 이제 공부 말고 놀자!',10000,'N');
+insert into tutor_info values(40,'꼼꼼한 영어 똑똑한 영어','https://www.youtube.com/embed/axR9gSM38do','기초부터 꼼꼼, 즐거운 영어 드립니다.',15000,'N');
+insert into tutor_info values(41,'해외여행 기본적인 의사소통[영어회화] 프리미엄 1:1 영어회화 코칭','https://www.youtube.com/embed/yNyQlk2bc2o','영어회화 해외여행에서 기본적인 의사소통이 가능하게 드립니다.',16000,'N');
+insert into tutor_info values(42,'영어회화 공부방법 실천 1:1코칭 영어회화 공부 방법을 알려드리고 2달 동안 공부 실천에 필요한 모든 것을 제공해 드립니다. (언어교환 포함)','https://www.youtube.com/embed/mE4BLzxcED0','1:1 영어회화 공부방법 코칭해 드립니다.',20000,'N');
+insert into tutor_info values(43,'(온라인) 원데이 영어면접 클래스 스크립트 첨삭 + 간단한 모의 면접 + 피드백','https://www.youtube.com/embed/ehvSlbsWxRk','원데이 "영어면접" 수업 드립니다.',30000,'N');
+insert into tutor_info values(44,'1:1 화상 영어회화(40분) 일상회화, 비즈니스 회화, 프리젠테이션 준비, 면접준비, 여행회화','https://www.youtube.com/embed/2sqa_hv9pGg','온라인 미국 원어민 영어회화 드립니다.',10000,'N');
+insert into tutor_info values(45,'REAL BUSINESS 경력이 있는 강사와 영어 인터뷰 준비를 위한 맞춤형 영어 수업, 인터뷰 준비과정','https://www.youtube.com/embed/lO69fLQlshU','맞춤형 ENGLISH INTERVIEW 원데이 영어 수업 드립니다.',17000,'N');
+
+insert into tutor_info values(46,'영어어렵지않고재밌고편안하게배워요! 제 수업에 가장 큰 강점이자 특징은 개인맞춤형 수업이자 편안하고 즐거운 수업입니다.','https://www.youtube.com/embed/lDapRfZnToI','영어과외,회화과외,비즈니스영어,영어내신,토스대비과외 드립니다.',17000,'N');
+
+
+
+
+select * from tutor_info;
+--EVALUATION 테이블
+
+insert into EVALUATION values(1, 2, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(2, 2, 47, 3, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(3, 2, 48, 1, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(4, 2, 49, 4, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(5, 2, 50, 2, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(6, 2, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(7, 3, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(8, 3, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(9, 3, 48, 5, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(10, 3, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(11, 4, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(12, 4, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(13, 4, 48, 5, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(14, 4, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(15, 4, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(16, 4, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(17, 5, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(18, 5, 47, 2, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(19, 5, 48, 5, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(20, 5, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(21, 5, 50, 5, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(22, 5, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(23, 6, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(24, 6, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(25, 6, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(26, 6, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(27, 6, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(28, 6, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(29, 7, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(30, 7, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(31, 7, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(32, 7, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(33, 7, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(34, 7, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(35, 8, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(36, 8, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(37, 8, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(38, 8, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(39, 8, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(40, 8, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(41, 9, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(42, 9, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(43, 9, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(44, 9, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(45, 9, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(46, 9, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(47, 10, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(48, 10, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(49, 10, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(50, 10, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(51, 10, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(52, 10, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(53, 11, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(54, 11, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(55, 11, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(56, 11, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(57, 11, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(58, 11, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(59, 12, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(60, 12, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(61, 12, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(62, 12, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(63, 12, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(64, 12, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(65, 13, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(66, 13, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(67, 13, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(68, 13, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(69, 13, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(70, 13, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(71, 14, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(72, 14, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(73, 14, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(74, 14, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(75, 14, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(76, 14, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(77, 15, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(78, 15, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(79, 15, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(80, 15, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(81, 15, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(82, 15, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(83, 16, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(84, 16, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(85, 16, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(86, 16, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(87, 16, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(88, 16, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(89, 17, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(90, 17, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(91, 17, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(92, 17, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(93, 17, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(94, 17, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(95, 18, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(96, 18, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(97, 18, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(98, 18, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(99, 18, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(100, 18, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(101, 19, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(102, 19, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(103, 19, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(104, 19, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(105, 19, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(106, 19, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(107, 20, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(108, 20, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(109, 20, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(110, 20, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(111, 20, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(112, 20, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(113, 21, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(114, 21, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(115, 21, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(116, 21, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(117, 21, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(118, 21, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(119, 22, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(120, 22, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(121, 22, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(122, 22, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(123, 22, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(124, 22, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(125, 23, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(126, 23, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(127, 23, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(128, 23, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(129, 23, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(130, 23, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(131, 24, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(132, 24, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(133, 24, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(134, 24, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(135, 24, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(136, 24, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(137, 25, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(138, 25, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(139, 25, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(140, 25, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(141, 25, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(142, 25, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(143, 26, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(144, 26, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(145, 26, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(146, 26, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(147, 26, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(148, 26, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(149, 27, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(150, 27, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(151, 27, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(152, 27, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(153, 27, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(154, 27, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(155, 28, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(156, 28, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(157, 28, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(158, 28, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(159, 28, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(160, 28, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(161, 29, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(162, 29, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(163, 29, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(164, 29, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(165, 29, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(166, 29, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(167, 30, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(168, 30, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(169, 30, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(170, 30, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(171, 30, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(172, 30, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(173, 31, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(174, 31, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(175, 31, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(176, 31, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(177, 31, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(178, 31, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(179, 32, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '3232-06-20', '3232-06-20');
+insert into EVALUATION values(180, 32, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '3232-06-21', '3232-06-21');
+insert into EVALUATION values(181, 32, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '3232-06-21', '3232-06-21' );
+insert into EVALUATION values(182, 32, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '3232-06-21', '3232-06-21' );
+insert into EVALUATION values(183, 32, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '3232-06-21', '3232-06-21' );
+insert into EVALUATION values(184, 32, 51, null, null, 'N', 'ShaneBurgos', null, '3232-06-21');
+
+insert into EVALUATION values(185, 33, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(186, 33, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(187, 33, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(188, 33, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(189, 33, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(190, 33, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-20');
+
+insert into EVALUATION values(191, 34, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(192, 34, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(193, 34, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(194, 34, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(195, 34, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(196, 34, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(197, 35, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(198, 35, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(199, 35, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(200, 35, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(201, 35, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(202, 35, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(203, 36, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(204, 36, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(205, 36, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(206, 36, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(207, 36, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(208, 36, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(209, 37, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(210, 37, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(211, 37, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(212, 37, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(213, 37, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(214, 37, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(215, 38, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(216, 38, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(217, 38, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(218, 38, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(219, 38, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(220, 38, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(221, 39, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(222, 39, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(223, 39, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(224, 39, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(225, 39, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(226, 39, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(227, 40, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(228, 40, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(229, 40, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(230, 40, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(231, 40, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(232, 40, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(233, 41, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(234, 41, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(235, 41, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(236, 41, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(237, 41, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(238, 41, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(239, 42, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(240, 42, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(241, 42, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(242, 42, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(243, 42, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(244, 42, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-20');
+
+insert into EVALUATION values(245, 43, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(246, 43, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(247, 43, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(248, 43, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(249, 43, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(250, 43, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(251, 44, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(252, 44, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-21', '2020-06-21');
+insert into EVALUATION values(253, 44, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(254, 44, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(255, 44, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-21', '2020-06-21' );
+insert into EVALUATION values(256, 44, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-21');
+
+insert into EVALUATION values(257, 45, 1, 5, '강의가 너무 재미있네요', 'Y', '이찬양', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(258, 45, 47, 4, '재미없어요', 'Y', 'CalvinKattar', '2020-06-20', '2020-06-20');
+insert into EVALUATION values(259, 45, 48, 4, '못가르쳐요', 'Y', 'FrankieEdgar', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(260, 45, 49, 5, '잘가르쳐요', 'Y', 'JoshEmmett', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(261, 45, 50, 4, '모르겠어요', 'Y', 'JeremyStephens', '2020-06-20', '2020-06-20' );
+insert into EVALUATION values(262, 45, 51, null, null, 'N', 'ShaneBurgos', null, '2020-06-20');
+
+select * from evaluation;
+--QUESTION_BOARD
+
+insert into QUESTION_BOARD values(1, 2, '충전이 안되는데요..??', '충전했는데 충전이 안돼요.. 30000원 충전했는데 얼른 해결 해주세요', SYSDATE, SYSDATE, 'Y');
+insert into QUESTION_BOARD values(2, 1, '로그인 어떻게 해요??', '로그인 어떻게 해요?>?', SYSDATE, SYSDATE, 'Y');
+insert into QUESTION_BOARD values(3, 2, 'how are you what', 'Im fine Thank you', SYSDATE, SYSDATE, 'Y');
+insert into QUESTION_BOARD values(4, 2, '안녕하세요??', '안녕히 가세요', SYSDATE, SYSDATE, 'Y');
+insert into QUESTION_BOARD values(5, 1, '강사 등록 어떻게 하는건가요?', '강사등록 어떻게 해요??', SYSDATE, SYSDATE, 'Y');
+insert into QUESTION_BOARD values(6, 3, '이 선생님 너무 못가르쳐요..', '너무너무 못가르치는데 어떻게해요??', SYSDATE, SYSDATE, 'N');
+insert into QUESTION_BOARD values(7, 3, '영어만 되나요??', '중국어도 배우고 싶은데', SYSDATE, SYSDATE, 'N');
+insert into QUESTION_BOARD values(8, 1, '밤에도 수업 들을수 있나요??', '밤에도 수업 듣고 싶어요', SYSDATE, SYSDATE, 'N');
+insert into QUESTION_BOARD values(9, 2, '파팅파팅', '우리모두 파이팅', SYSDATE, SYSDATE, 'N');
+
+select * from question_board;
+--QUESTION_BOARD_COMMENT 
+
+insert into QUESTION_BOARD_COMMENT values(1, 1, SYSDATE,  '충전버튼은 마이페이지에 있습니다~', 0);
+insert into QUESTION_BOARD_COMMENT values(2, 2, SYSDATE,  '로그인은 우측 상단에 버튼으로 할 수 있습니다.', 0);
+insert into QUESTION_BOARD_COMMENT values(3, 3, SYSDATE,  'Hello cheer up everybody', 0);
+insert into QUESTION_BOARD_COMMENT values(4, 4, SYSDATE,  '안녕하세요~~~~', 0);
+insert into QUESTION_BOARD_COMMENT values(5, 5, SYSDATE,  '강사등록은 상단 헤더에 튜터 등록을 통해 진행하실 수 있습니다.', 0);
+
+select * from question_board_comment;
+--FILE_PROFILE_IMAGE
+
+
+insert into FILE_PROFILE_IMAGE values(1, 2, 'SMITH.jpg', 'a998cdbe5f8a4907bb06186c4f73b71b.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(2, 3, 'Khabib Nurmagomedov.jpg', '859a18126d1745bfa0e4a4832b65a801.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(3, 4, 'Stipe Miocic.jpg', '8d87df202212460fb9f19b4c3654822c.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(4, 5, 'Israel Adesanya.jpg', '11ba83e0405e4d8494accfdcdabd1b0a.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(5, 6, 'Daniel Cormier.jpg', '50d809ea5a6749a3ab48c6b1f5083d78.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(6, 7, 'Kamaru Usman.jpg', '00a769244be543c2bb34a5e699aa9186.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(7, 8, 'Alexander Volkanovski.jpg', 'cc66b7747aa344759790fcd54daed495.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(8, 9, 'Conor McGregor.jpg', '50c02e165e8d4a048d608dbde53b357c.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(9, 10, 'Max Holloway.jpg', '5c6b59f5d55146deb99c975b9bea3d56.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(10, 11, 'Justin Gaethje.jpg', 'f84a8399104b4dbca250d9fb828bf036.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(11, 12, 'Dustin Poirier.jpg', '07e07d91f7cf480a8226b5b8b323619a.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(12, 13, 'Tony Ferguson.jpg', '7e1c940031824dc7bfde3c4ace9c0936.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(13, 14, 'Robert Whittaker.jpg', '8af59e58f9dc426ea65aca3e888804f5.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(14, 15, 'Francis Ngannou.jpg', '1765feb8188244639393ff24dbe46704.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(15, 16, 'Dominick Reyes.jpg', '9a155e4a3ec246d1a2a7341317d274cb.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(16, 17, 'Deiveson Figueiredo.jpg', 'dfb52651468d45ecb917a7024dca6d0c.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(17, 18, 'Joseph Benavidez.jpg', '5dccd05473d944599dea717a8a1e2461.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(18, 19, 'Brandon Moreno.jpg', 'cc7775e501444064b95a141c794ad75a.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(29, 20, 'Alexandre Pantoja.jpg', '21d20198c3254c57821e780cf7c24d21.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(20, 21, 'Alex Perez.jpg', 'eabef149ac254968b5aa2ebad0083823.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(21, 22, 'Jussier Formiga.jpg', 'd1fc531e5d5c475da79c3a8702fd118f.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(22, 23, 'Askar Askarov.jpg', '135c93361bd444e3a4f982a85a665b85.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(23, 24, 'KaiKara France.jpg', '05456438d9e54719b50aada1f45dcb3d.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(24, 25, 'Rogerio Bontorin.jpg', '3925c02f2d394e7aa67024eac4162b07.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(25, 26, 'Matt Schnell.jpg', 'f4d3d5e500b2424c85a440d449db803b.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(26, 27, 'Jordan Espinosa.jpg', '2f5de6fcb2d04ad08f853ecc5492b97f.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(27, 28, 'Tim Elliott.jpg', '5bb581d2f0f24a3f80b0cb224bb15a40.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(28, 29, 'Raulian Paiva.jpg', '5e0b730ffeec4608a01c82e0b7ffd5a3.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(29, 30, 'David Dvorak.jpg', '07b5b55a817d41bcb7d77a6ec064f8f9.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(30, 31, 'Marlon Moraes.jpg', 'eb8dac4374a0424384e17c29d5cc006b.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(31, 32, 'Aljamain Sterling.jpg', 'bf7df8b2af4b42c38e681b9f892764ac.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(32, 33, 'Peter Yan.jpg', 'fa2b60d558d24027af696f0132203add.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(33, 34, 'Cory Sandhagen.jpg', 'd94a30fc84704ddaa0c37af8b1a768e7.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(34, 35, 'Cody Garbrandt.jpg', '9e6f317f085143629cb04835f6c8c909.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(35, 36, 'Jose Aldo.jpg', '14318f7f5dcd4729a01cd55a95e521f1.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(36, 37, 'Pedro Munhoz.jpg', 'b671b80dcdc045fb90c89de940212f0d.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(37, 38, 'Raphael Assuncao.jpg', '071ba2b064b84cd5b9ea509b028081a3.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(38, 39, 'Jimmie Rivera.jpg', '3f7e0cd9f1e04266a1c5f678faa5b046.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(39, 40, 'Rob Font.jpg', '602b7e0aa1cb49ec80da373c2943da2f.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(40, 41, 'John Dodson.jpg', 'cb2be9a8125445b8a9ba80c97f34d599.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(41, 42, 'SeanO Malley.jpg', 'd3e23abef6b54f98b7f4266d63694fc8.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(42, 43, 'Song Yadong.jpg', '6f57821738eb4325bf6703a700553966.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(43, 44, 'Brian Ortega.jpg', '1692464c369f4056917c6a16b174b0e7.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(44, 45, 'Zabit Magomedsharipov.jpg', 'ca113aca43d14682bae6b809fbc5455a.jpg', 3235, SYSDATE);
+insert into FILE_PROFILE_IMAGE values(45, 46, 'Yair Rodriguez.jpg', 'e9cb1596bb6a4341a8a2d38ba98031e4.jpg', 3235, SYSDATE);
+select * from file_profile_image;
+commit;
+
+select member_no, member_name from tutor_info t, member m
+where t.tutor_no = m.member_no;
+
+
+insert into member values(68,'rjg@gmail.com','rjg123','RyuJaeGeon','2020-07-17','2020-07-17','KOREA','F','1996-01-16',200000,'Y');
+insert into tutor_info values(68,'영어어렵지않고재밌고편안하게배워요! 제 수업에 가장 큰 강점이자 특징은 개인맞춤형 수업이자 편안하고 즐거운 수업입니다.','https://www.youtube.com/embed/krbNHEDQOvU','영어과외,회화과외,비즈니스영어,영어내신,토스대비과외 드립니다.',17000,'N');
+insert into FILE_PROFILE_IMAGE values(46, 68, 'RueJaeGeon.jpg', '19cb1596bb6a4341a8a2d38ba98031e4.jpg', 3235, SYSDATE);
+insert into EVALUATION values(263, 68, 1, null, null, 'N', '이찬양', null, '2020-07-17');
+insert into EVALUATION values(264, 68, 50, 4, '모르겠어요', 'Y', 'Jeremy Step', '2020-06-20', '2020-06-20' );
+

@@ -1,0 +1,118 @@
+
+#pageSize {
+    width: 1900px;
+    height: 920px;
+    padding: 114px 0px 0px 63px;
+    box-sizing: border-box;
+    padding-bottom: 0px;
+}
+
+#myPageBox {
+	width: 1150px;
+	height: 690px;
+	padding: 30px 50px;
+}
+
+#pageName {
+font-size: 2vw;
+    font-weight: bold;
+    border-bottom: 3px solid #EBEDED;
+    margin-bottom: 25px;
+}
+
+#mainLeft {
+	width: 400px;
+	height: 260px;
+	float: left;
+}
+
+#mainRight {
+	width: 400px;
+	height: 260px;
+	float: right;
+}
+
+.infoFont {
+	font-size: 40px;
+	color: #FA6980;
+	font-weight: bold;
+}
+
+#myPageBox div h1 {
+	margin-bottom: 40px;
+}
+
+#myPageBox div p {
+	margin-left: 40px;
+}
+
+.blackBtn {
+	width: 140px;
+	height: 40px;
+	border-radius: 13px;
+	color: white;
+	font-weight: bold;
+	background-color: black;
+	margin-left: 64px;
+}
+
+.disabledBtn {
+	width: 140px;
+	height: 40px;
+	border-radius: 13px;
+	color: white;
+	font-weight: bold;
+	background-color: grey;
+	margin-left: 64px;
+}
+
+.pwdInputBox {
+    width: 300px;
+    height: 40px;
+    border: 2px solid #C4C3C3;
+    margin: 52px 60px;
+}
+
+#pwdCheckBox {
+	width: 420px;
+	height: 300px;
+	border: 1px solid #707070;
+	border-radius: 32px;
+	margin: auto;
+}
+
+input:read-only {
+       background-color: #F5F5F5;
+}
+
+.textCenter {
+text-align: center;
+
+}
+
+.textLeft {
+text-align: left;
+
+}
+
+.textRight {
+text-align: right;
+
+}
+
+.textMid {
+	vertical-align: middle;
+	
+}
+
+.contentBox {
+	
+	margin-top: 80px;
+}
+
+
+/* #searchingForm { */
+/* 	margin-top: 20px; */
+/*     margin: 15px 190px; */
+	
+/* } */

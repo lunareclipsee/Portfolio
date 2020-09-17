@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+ "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.englishvillage.auth">
+
+	<resultMap type="com.englishvillage.auth.model.MemberDto" id="memberResultMap">
+	
+		<id column="MEMBER_NO" property="memberNo"/>
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="MEMBER_EMAIL" property="memberEmail" />
+		<result column="MEMBER_GRADE" property="memberGrade" />
+		<result column="MEMBER_PASSWORD" property="memberPassword" />
+		<result column="MEMBER_POINT" property="memberPoint" />
+		<result column="MEMBER_COUNTRY" property="memberCountry" />
+		<result column="MEMBER_GENDER" property="memberGender" />
+		<result column="MEMBER_BIRTH_DATE" property="memberBirthDate" javaType="java.util.Date"/>
+	
+	</resultMap>
+
+	<select id="memberExist" parameterType="map" resultMap="memberResultMap">
+	
+		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_EMAIL, MEMBER_GRADE, MEMBER_POINT
+			, MEMBER_COUNTRY, MEMBER_GENDER, MEMBER_PASSWORD, MEMBER_BIRTH_DATE
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND MEMBER_PASSWORD = #{memberPassword}
+		
+	</select>
+	
+	<select id="memberFindPassword" parameterType="map" resultMap="memberResultMap">
+	
+		SELECT MEMBER_NAME, MEMBER_EMAIL, MEMBER_PASSWORD
+		FROM MEMBER
+		WHERE MEMBER_NAME = #{memberName} 
+		AND MEMBER_BIRTH_DATE = #{memberBirthDate}
+		AND MEMBER_EMAIL = #{memberEmail}	
+		
+	</select>
+	
+	<select id="emailCheck" parameterType="com.englishvillage.auth.model.MemberDto" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE  MEMBER_EMAIL = #{memberEmail}
+	</select>
+	
+	<insert id="memberInsertOne" parameterType="memberDto" useGeneratedKeys="true" keyProperty="memberNo">
+		
+		<selectKey keyProperty="memberNo" resultType="int" order="BEFORE">
+			SELECT MEMBER_MEMBER_NO_SEQ.NEXTVAL+67 FROM DUAL
+		</selectKey>
+		
+		INSERT INTO MEMBER
+		VALUE(MEMBER_NO
+			, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NAME
+			, MEMBER_CREATE_DATE, MEMBER_MODIFY_DATE, MEMBER_COUNTRY
+			, MEMBER_GENDER, MEMBER_BIRTH_DATE, MEMBER_POINT, MEMBER_GRADE)
+		VALUES(#{memberNo}
+			, #{memberEmail}, #{memberPassword}, #{memberName}
+			, SYSDATE, SYSDATE, #{memberCountry}, #{memberGender}, #{memberBirthDate}, 0, 'N')
+	</insert>
+	
+	
+</mapper>
+
+
+
+
